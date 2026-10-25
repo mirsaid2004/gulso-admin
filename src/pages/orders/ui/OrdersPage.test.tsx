@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { db } from '@/mocks/db'
-import { renderWithProviders } from '@/shared/test/render'
+import { renderWithProviders } from '@/test/render'
 import { OrdersPage } from './OrdersPage'
 
 const row = (orderId: number) => screen.getByText(`Order #${orderId}`).closest('tr')!

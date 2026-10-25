@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from '@/shared/test/render'
+import { renderWithProviders } from '@/test/render'
 import { ShopRequestsPage } from './ShopRequestsPage'
 
 async function setup() {

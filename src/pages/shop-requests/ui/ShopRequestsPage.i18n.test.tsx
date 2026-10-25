@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { i18n } from '@/shared/i18n'
-import { renderWithProviders } from '@/shared/test/render'
+import { renderWithProviders } from '@/test/render'
 import { ShopRequestsPage } from './ShopRequestsPage'
 
 describe('ShopRequestsPage localized', () => {

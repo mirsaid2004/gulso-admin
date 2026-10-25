@@ -4,7 +4,7 @@ import { http } from 'msw'
 import { db } from '@/mocks/db'
 import { server } from '@/mocks/server'
 import { api, fail } from '@/mocks/handlers/utils'
-import { renderHookWithProviders } from '@/shared/test/render'
+import { renderHookWithProviders } from '@/test/render'
 import { useReviewShopRequest } from './useReviewShopRequest'
 
 const pending = () => structuredClone(db.shopRequests.find((r) => r.id === 41)!)

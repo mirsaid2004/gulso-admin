@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { act, waitFor } from '@testing-library/react'
 import { db } from '@/mocks/db'
-import { renderHookWithProviders } from '@/shared/test/render'
+import { renderHookWithProviders } from '@/test/render'
 import { useShopsViewModel } from './useShopsViewModel'
 
 async function setup() {

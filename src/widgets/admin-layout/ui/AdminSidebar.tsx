@@ -1,16 +1,19 @@
 import { LogOut } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import type { Viewer } from '@/entities/viewer'
+import type { Profile } from '@/entities/session'
+import { RoleTag } from '@/entities/user'
 import { useLocale } from '@/shared/i18n'
 import { cn } from '@/shared/lib'
+import { Monogram } from '@/shared/ui'
 import { NAV_ITEMS } from '../model/navigation'
 
 interface AdminSidebarProps {
   pendingCount: number
-  viewer?: Viewer
+  profile?: Profile
+  onLogout: () => void
 }
 
-export function AdminSidebar({ pendingCount, viewer }: AdminSidebarProps) {
+export function AdminSidebar({ pendingCount, profile, onLogout }: AdminSidebarProps) {
   const { t } = useLocale()
   return (
     <aside className="sticky top-0 z-10 flex h-screen w-64 shrink-0 flex-col border-r border-slate-50 bg-white">
@@ -60,19 +63,24 @@ export function AdminSidebar({ pendingCount, viewer }: AdminSidebarProps) {
 
       <div className="border-t border-slate-50 p-4">
         <div className="flex items-center justify-between gap-3 rounded-2xl p-3 hover:bg-slate-50">
-          {viewer && (
-            <div className="flex items-center gap-3">
-              <img src={viewer.avatarUrl} alt="" className="size-9 rounded-[14px] border-2 border-white shadow-sm" />
-              <div className="flex flex-col">
-                <span className="text-xs font-black text-slate-900">{viewer.name}</span>
-                <span className="text-[9px] font-bold tracking-tighter text-slate-400 uppercase">
-                  {viewer.role} · ID: {viewer.id}
+          {profile && (
+            <div className="flex min-w-0 items-center gap-3">
+              {profile.avatarUrl ? (
+                <img src={profile.avatarUrl} alt="" className="size-9 rounded-[14px] border-2 border-white shadow-sm" />
+              ) : (
+                <Monogram name={profile.name} size="sm" tone="neutral" />
+              )}
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <span className="truncate text-xs font-black text-slate-900">{profile.name}</span>
+                <span className="flex items-center gap-1 text-[9px] font-bold tracking-tighter text-slate-400 uppercase">
+                  <RoleTag role="ADMIN" /> ID: {profile.id}
                 </span>
               </div>
             </div>
           )}
           <button
             type="button"
+            onClick={onLogout}
             title={t('layout.logout')}
             aria-label={t('layout.logout')}
             className="flex rounded-[10px] border-none bg-transparent p-2 text-slate-400 hover:bg-rose-50 hover:text-rose-500"

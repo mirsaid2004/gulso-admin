@@ -1,1 +1,8 @@
-export { apiClient, ApiError, API_PREFIX, type ApiResponse } from './apiClient'
+export {
+  apiClient,
+  ApiError,
+  API_PREFIX,
+  configureApiAuth,
+  type ApiResponse,
+  type ApiAuthBridge,
+} from './apiClient'

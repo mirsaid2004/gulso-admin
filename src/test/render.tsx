@@ -1,7 +1,8 @@
 import type { ReactElement, ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { MemoryRouter } from 'react-router-dom'
+import { createMemoryRouter, MemoryRouter, RouterProvider } from 'react-router-dom'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
+import { routes } from '@/app/router'
 import { Toaster } from '@/shared/ui'
 
 export function createTestQueryClient() {
@@ -38,4 +39,16 @@ export function renderWithProviders(ui: ReactElement, options: Options & Omit<Re
 
 export function renderHookWithProviders<T>(hook: () => T, options: Options = {}) {
   return renderHook(hook, { wrapper: makeWrapper(options) })
+}
+
+/** Mounts the real route table (guards, layout, lazy pages) at `route`. */
+export function renderApp(route = '/', queryClient = createTestQueryClient()) {
+  const router = createMemoryRouter(routes, { initialEntries: [route] })
+  const view = render(
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <Toaster />
+    </QueryClientProvider>,
+  )
+  return { ...view, router, queryClient }
 }

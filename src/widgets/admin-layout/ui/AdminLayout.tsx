@@ -8,7 +8,7 @@ export function AdminLayout() {
 
   return (
     <div className="flex min-h-screen w-full">
-      {vm.sidebarOpen && <AdminSidebar pendingCount={vm.pendingCount} viewer={vm.viewer} />}
+      {vm.sidebarOpen && <AdminSidebar pendingCount={vm.pendingCount} profile={vm.profile} onLogout={vm.logout} />}
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminHeader pageTitle={vm.pageTitle} pendingCount={vm.pendingCount} onToggleSidebar={vm.toggleSidebar} />
         <main className="flex flex-1 flex-col gap-8 p-8 pb-[72px]">

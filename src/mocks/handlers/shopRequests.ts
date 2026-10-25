@@ -2,7 +2,7 @@ import { http } from 'msw'
 import { DEFAULT_COMMISSION } from '@/entities/shop'
 import type { ShopRequest } from '@/entities/shop-request'
 import { db, nextId } from '../db'
-import { api, fail, notFound, ok } from './utils'
+import { api, currentMaintainer, fail, notFound, ok } from './utils'
 
 function findPending(id: unknown): ShopRequest | Response {
   const request = db.shopRequests.find((r) => r.id === Number(id))
@@ -19,7 +19,7 @@ async function readNote(request: Request): Promise<string> {
 export const shopRequestHandlers = [
   http.get(api('/admin/shop-requests'), () => ok(db.shopRequests)),
 
-  http.post(api('/admin/shop-requests/:id/approve'), ({ params }) => {
+  http.post(api('/admin/shop-requests/:id/approve'), ({ params, request }) => {
     const found = findPending(params.id)
     if (found instanceof Response) return found
 
@@ -37,7 +37,7 @@ export const shopRequestHandlers = [
     if (owner && !owner.roles.includes('SELLER')) owner.roles.push('SELLER')
 
     found.status = 'APPROVED'
-    found.note = `Approved by ${db.viewer.name} · opened as shop ID ${shopId}`
+    found.note = `Approved by ${currentMaintainer(request)?.name} · opened as shop ID ${shopId}`
     return ok({ request: found, shopId })
   }),
 

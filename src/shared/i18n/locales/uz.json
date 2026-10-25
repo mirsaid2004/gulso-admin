@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Bekor qilish",
     "close": "Yopish",
+    "back": "Orqaga",
     "edit": "Tahrirlash",
     "actions": "Amallar",
     "currency": "so'm",
@@ -33,6 +34,29 @@
     "pendingRequests_one": "{{count}} ta do'kon arizasi kutmoqda",
     "pendingRequests_other": "{{count}} ta do'kon arizasi kutmoqda",
     "pendingBadge": "{{count}} ta kutilmoqda"
+  },
+  "login": {
+    "title": "Xush kelibsiz",
+    "subtitle": "Administrator telefon raqamingiz bilan kiring",
+    "phoneLabel": "Telefon raqam",
+    "phonePlaceholder": "90 123 45 67",
+    "phoneHint": "SMS orqali tasdiqlash kodi yuboriladi",
+    "sendCode": "Kodni yuborish",
+    "errors": {
+      "NOT_MAINTAINER": "Bu raqamda boshqaruv paneliga kirish huquqi yo'q",
+      "USER_BLOCKED": "Bu hisob bloklangan",
+      "INVALID_OTP": "Kod noto'g'ri. Qayta urinib ko'ring",
+      "generic": "Xato yuz berdi. Qayta urinib ko'ring"
+    }
+  },
+  "otp": {
+    "title": "Kodni kiriting",
+    "subtitle": "<b>{{phone}}</b> raqamiga yuborilgan 6 xonali kodni kiriting",
+    "digit": "{{index}}-raqam",
+    "resend": "Kodni qayta yuborish",
+    "resendIn": "{{time}} dan keyin qayta yuborish",
+    "verify": "Tasdiqlash",
+    "demoHint": "Demo: raqam {{phone}}, kod {{code}}"
   },
   "pages": {
     "requests": {

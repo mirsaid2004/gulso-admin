@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancel",
     "close": "Close",
+    "back": "Back",
     "edit": "Edit",
     "actions": "Actions",
     "currency": "UZS",
@@ -33,6 +34,29 @@
     "pendingRequests_one": "{{count}} shop request waiting",
     "pendingRequests_other": "{{count}} shop requests waiting",
     "pendingBadge": "{{count}} pending"
+  },
+  "login": {
+    "title": "Welcome",
+    "subtitle": "Sign in with your maintainer phone number",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "90 123 45 67",
+    "phoneHint": "A confirmation code will be sent via SMS",
+    "sendCode": "Send code",
+    "errors": {
+      "NOT_MAINTAINER": "This number has no access to the maintainer panel",
+      "USER_BLOCKED": "This account is blocked",
+      "INVALID_OTP": "Wrong code. Try again",
+      "generic": "Something went wrong. Try again"
+    }
+  },
+  "otp": {
+    "title": "Enter the code",
+    "subtitle": "Enter the 6-digit code sent to <b>{{phone}}</b>",
+    "digit": "Digit {{index}}",
+    "resend": "Resend code",
+    "resendIn": "Resend in {{time}}",
+    "verify": "Verify",
+    "demoHint": "Demo: number {{phone}}, code {{code}}"
   },
   "pages": {
     "requests": {

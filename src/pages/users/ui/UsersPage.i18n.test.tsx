@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { screen, within } from '@testing-library/react'
 import { i18n } from '@/shared/i18n'
-import { renderWithProviders } from '@/shared/test/render'
+import { renderWithProviders } from '@/test/render'
 import { UsersPage } from './UsersPage'
 
 describe('UsersPage localized', () => {

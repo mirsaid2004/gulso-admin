@@ -3,8 +3,9 @@ import type { User } from '@/entities/user'
 import type { Shop } from '@/entities/shop'
 import type { Product } from '@/entities/product'
 import type { Order } from '@/entities/order'
+import { avatars } from '../data/seed'
 import { db } from '../db'
-import { api, applyPatch, notFound, ok } from './utils'
+import { api, applyPatch, currentMaintainer, fail, notFound, ok } from './utils'
 
 type Collection = 'users' | 'shops' | 'products' | 'orders'
 type EntityOf = { users: User; shops: Shop; products: Product; orders: Order }
@@ -26,7 +27,14 @@ function resource<C extends Collection>(collection: C) {
 }
 
 export const resourceHandlers = [
-  http.get(api('/admin/me'), () => ok(db.viewer)),
+  // Every admin endpoint needs a maintainer's access token. Returning nothing falls through to the real handler.
+  http.all(api('/admin/*'), ({ request }) =>
+    currentMaintainer(request) ? undefined : fail(401, 'UNAUTHORIZED', 'Sign in required'),
+  ),
+  http.get(api('/admin/me'), ({ request }) => {
+    const { id, name, roles } = currentMaintainer(request)!
+    return ok({ id, name, roles, avatarUrl: avatars[id] ?? null })
+  }),
   ...resource('users'),
   ...resource('shops'),
   ...resource('products'),

@@ -1,4 +1,3 @@
-import type { Viewer } from '@/entities/viewer'
 import type { User } from '@/entities/user'
 import type { Shop } from '@/entities/shop'
 import type { Product } from '@/entities/product'
@@ -18,7 +17,11 @@ const DOCUMENTS: RequestDocument[] = [
   { title: "Owner's passport / ID", fileName: 'passport.jpg', size: '840 KB', url: '#' },
 ]
 
-export const viewer: Viewer = { id: 1, name: 'Dilnoza K.', role: 'Admin', avatarUrl: 'https://github.com/shadcn.png' }
+/** Demo OTP accepted for every phone (same as the seller panel). */
+export const DEMO_OTP = '123456'
+
+/** Profile photos by user id; users without one get a monogram. */
+export const avatars: Record<number, string> = { 1: 'https://github.com/shadcn.png' }
 
 export const users: User[] = [
   { id: 1, name: 'Dilnoza K.', phone: '+998 90 000 00 01', roles: ['ADMIN'], joinedAt: '2025-12-01', blocked: false },

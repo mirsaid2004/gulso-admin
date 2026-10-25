@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { act, waitFor } from '@testing-library/react'
-import { renderHookWithProviders } from '@/shared/test/render'
+import { renderHookWithProviders } from '@/test/render'
 import { useShopRequestsViewModel } from './useShopRequestsViewModel'
 
 async function setup() {
