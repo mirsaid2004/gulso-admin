@@ -1,12 +1,11 @@
+import { useLocale } from '@/shared/i18n'
 import { Button, ChoiceChip, Pill, Sheet, SwitchRow } from '@/shared/ui'
 import { cn } from '@/shared/lib'
 import { useEditDraft } from '../model/useEditDraft'
-import type { Draft, FieldDef } from '../model/types'
-
-const KIND_LABEL = { shop: 'Shop', product: 'Product', order: 'Order', user: 'User' } as const
+import type { Draft, EntityKind, FieldDef } from '../model/types'
 
 interface EditEntityDrawerProps {
-  kind: keyof typeof KIND_LABEL
+  kind: EntityKind
   entityId: number
   fields: FieldDef[]
   original: Draft
@@ -17,22 +16,23 @@ interface EditEntityDrawerProps {
 
 /** Mount with `key={entityId}` so the draft resets when another entity is opened. */
 export function EditEntityDrawer({ kind, entityId, fields, original, isSaving, onSave, onClose }: EditEntityDrawerProps) {
+  const { t } = useLocale()
   const form = useEditDraft(fields, original)
-  const title = kind === 'order' ? `Order #${entityId}` : String(form.draft.name || '—')
+  const title = kind === 'order' ? t('orders.orderNumber', { id: entityId }) : String(form.draft.name || '—')
 
   return (
     <Sheet
       open
       onOpenChange={(open) => !open && onClose()}
-      eyebrow={`${KIND_LABEL[kind]} · ID ${entityId}`}
+      eyebrow={t('edit.eyebrow', { kind: t(`edit.kind.${kind}`), id: entityId })}
       title={title}
-      description="Changes apply immediately for buyers and the seller."
+      description={t('edit.description')}
       footer={
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold text-slate-400">{form.dirtyLabel}</span>
           <div className="flex gap-2">
             <Button variant="ghost" className="px-5" onClick={onClose}>
-              Cancel
+              {t('common.cancel')}
             </Button>
             <Button
               variant="primary"
@@ -40,7 +40,7 @@ export function EditEntityDrawer({ kind, entityId, fields, original, isSaving, o
               disabled={!form.dirtyCount || isSaving}
               onClick={() => onSave(form.getPatch(), title)}
             >
-              Save changes
+              {t('edit.save')}
             </Button>
           </div>
         </div>
@@ -61,7 +61,7 @@ export function EditEntityDrawer({ kind, entityId, fields, original, isSaving, o
               </label>
               {form.isDirty(field.key) && (
                 <Pill tone="amber" className="px-2 py-0.5 text-[9px] tracking-[0.05em]">
-                  EDITED
+                  {t('edit.edited')}
                 </Pill>
               )}
             </div>

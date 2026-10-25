@@ -1,5 +1,5 @@
 export type { Order, OrderPatch, OrderStatus, DeliveryType } from './model/types'
-export { ORDER_STATUSES, ORDER_STATUS_META, DELIVERY_META } from './model/constants'
+export { ORDER_STATUSES, ORDER_STATUS_TONE, DELIVERY_TYPES, DELIVERY_TONE } from './model/constants'
 export { commissionAmount, isCancellable } from './lib/order'
 export { orderApi } from './api/orderApi'
 export { orderKeys, useOrdersQuery, useUpdateOrderMutation } from './api/queries'

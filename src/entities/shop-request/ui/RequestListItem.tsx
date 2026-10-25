@@ -1,3 +1,4 @@
+import { useLocale } from '@/shared/i18n'
 import { cn } from '@/shared/lib'
 import { Monogram, Pill } from '@/shared/ui'
 
@@ -12,6 +13,7 @@ interface RequestListItemProps {
 }
 
 export function RequestListItem({ name, ownerName, emojis, age, resubmitted, selected, onSelect }: RequestListItemProps) {
+  const { t } = useLocale()
   return (
     <button
       type="button"
@@ -33,7 +35,7 @@ export function RequestListItem({ name, ownerName, emojis, age, resubmitted, sel
         </span>
         {resubmitted && (
           <Pill tone="blue" className="mt-0.5 self-start px-2 py-0.5 text-[9px] tracking-[0.05em]">
-            RESUBMITTED
+            {t('requests.resubmitted')}
           </Pill>
         )}
       </div>

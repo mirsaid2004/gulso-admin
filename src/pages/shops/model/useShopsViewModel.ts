@@ -6,11 +6,13 @@ import { useProductsQuery } from '@/entities/product'
 import { useOrdersQuery } from '@/entities/order'
 import { useToggleShopSuspension } from '@/features/moderate-shop'
 import { shopFields, toDraft, useEntityEditor } from '@/features/edit-entity'
-import { categoryLabel, ROUTES, SHOP_FILTER_PARAM } from '@/shared/config'
+import { ROUTES, SHOP_FILTER_PARAM } from '@/shared/config'
+import { useLocale } from '@/shared/i18n'
 import { matchesQuery } from '@/shared/lib'
 import { computeShopStats, matchesShopTab, SHOP_TABS, type ShopTab } from './shopRows'
 
 export function useShopsViewModel() {
+  const { t, money } = useLocale()
   const navigate = useNavigate()
   const shopsQuery = useShopsQuery()
   const usersQuery = useUsersQuery()
@@ -27,14 +29,18 @@ export function useShopsViewModel() {
 
   const rows = shops
     .filter((s) => matchesShopTab(s, tab) && matchesQuery(search, s.name, findUser(users, s.ownerId).name))
-    .map((shop) => ({
-      shop,
-      ownerName: findUser(users, shop.ownerId).name,
-      categories: shop.categories.map(categoryLabel).join(', '),
-      status: getShopStatus(shop),
-      stats: computeShopStats(shop.id, productsQuery.data ?? [], ordersQuery.data ?? []),
-      isToggling: suspension.pendingId === shop.id,
-    }))
+    .map((shop) => {
+      const stats = computeShopStats(shop.id, productsQuery.data ?? [], ordersQuery.data ?? [])
+      return {
+        shop,
+        ownerName: findUser(users, shop.ownerId).name,
+        categories: shop.categories.map((c) => t(`categories.${c}`)).join(', '),
+        status: getShopStatus(shop),
+        stats,
+        revenue: money(stats.revenue),
+        isToggling: suspension.pendingId === shop.id,
+      }
+    })
 
   const editing = editor.target && shops.find((s) => s.id === editor.target!.id)
   const goFiltered = (route: string, shop: Shop) => navigate(`${route}?${SHOP_FILTER_PARAM}=${shop.id}`)
@@ -45,13 +51,17 @@ export function useShopsViewModel() {
     setSearch,
     tab,
     setTab,
-    tabs: SHOP_TABS.map((t) => ({ ...t, count: shops.filter((s) => matchesShopTab(s, t.key)).length })),
+    tabs: SHOP_TABS.map((key) => ({
+      key,
+      label: t(`shops.tabs.${key}`),
+      count: shops.filter((s) => matchesShopTab(s, key)).length,
+    })),
     rows,
     toggleSuspension: suspension.toggle,
     viewProducts: (shop: Shop) => goFiltered(ROUTES.products, shop),
     viewOrders: (shop: Shop) => goFiltered(ROUTES.orders, shop),
     edit: (shop: Shop) => editor.open({ kind: 'shop', id: shop.id }),
     editor,
-    editing: editing ? { id: editing.id, original: toDraft(editing), fields: shopFields(users) } : null,
+    editing: editing ? { id: editing.id, original: toDraft(editing), fields: shopFields(t, users) } : null,
   }
 }

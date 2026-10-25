@@ -3,6 +3,7 @@ import { useUpdateShopMutation } from '@/entities/shop'
 import { useUpdateProductMutation } from '@/entities/product'
 import { useUpdateOrderMutation } from '@/entities/order'
 import { useUpdateUserMutation } from '@/entities/user'
+import { useLocale } from '@/shared/i18n'
 import { notify } from '@/shared/ui'
 import type { Draft, EntityKind } from './types'
 
@@ -11,15 +12,9 @@ export interface EditTarget {
   id: number
 }
 
-const SUCCESS_DESCRIPTION: Record<EntityKind, string> = {
-  shop: 'The seller has been notified of the edit.',
-  product: 'The seller has been notified of the edit.',
-  order: 'The seller has been notified of the edit.',
-  user: 'The user will see the changes on next login.',
-}
-
 /** Page-level state for which entity is open in the edit drawer, and saving it. */
 export function useEntityEditor() {
+  const { t } = useLocale()
   const [target, setTarget] = useState<EditTarget | null>(null)
   const shop = useUpdateShopMutation()
   const product = useUpdateProductMutation()
@@ -33,7 +28,10 @@ export function useEntityEditor() {
     if (!target) return
     const close = () => {
       setTarget(null)
-      notify(`${label} updated`, SUCCESS_DESCRIPTION[target.kind])
+      notify(
+        t('edit.toast.updated', { label }),
+        t(target.kind === 'user' ? 'edit.toast.userNotified' : 'edit.toast.sellerNotified'),
+      )
     }
     if (!Object.keys(patch).length) return setTarget(null)
     // Each mutation takes its own entity's patch type; the drawer's schema guarantees the keys match.
@@ -42,7 +40,7 @@ export function useEntityEditor() {
     }
     mutation.mutate(
       { id: target.id, patch },
-      { onSuccess: close, onError: (e) => notify('Could not save changes', e.message, 'danger') },
+      { onSuccess: close, onError: (e) => notify(t('edit.toast.failed'), e.message, 'danger') },
     )
   }
 

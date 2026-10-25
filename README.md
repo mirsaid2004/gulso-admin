@@ -44,6 +44,18 @@ Import a slice through its `index.ts` (public API), never its internals.
 - **ViewModel**: one hook per page or feature (`useShopsViewModel`, `useReviewShopRequest`, `useEditDraft`…). It joins queries, holds UI state (search, tab, selection, drafts) and exposes ready-to-render data and commands.
 - **View**: components that render what the view model returns and call its commands. No fetching or business rules in the views.
 
+## i18n
+
+Same setup as `gulso-seller`: i18next + react-i18next + the browser language detector. The panel supports **uz** (the fallback), **ru** and **en**. The chosen language is saved in `localStorage["admin-lang"]` and mirrored on `<html lang>`.
+
+- Locales live in `src/shared/i18n/locales/*.json`, and keys are type-checked against `en.json` (`i18next.d.ts`). `locales.test.ts` fails if uz or ru has missing or extra keys, or different `{{placeholders}}`.
+- In components and view-models, use `useLocale()` from `@/shared/i18n`. It returns `t`, the active `language`, `changeLanguage` and `money(n)` ("339 300 so'm").
+- Domain helpers stay language-free: they return keys or kinds (`getProductBadge → { key }`, `getAge → { unit, count }`, `getOwnerTag → { kind }`), and the view-model translates them.
+- Plurals use i18next suffixes. Russian needs `_one/_few/_many/_other`.
+- Dates go through `formatDate`/`formatDateTime(iso, language)`. Browsers ship incomplete CLDR data for Uzbek, so Uzbek dates are formatted by hand.
+- Data from the API (shop names, descriptions, notes, document titles) is shown as-is, not translated.
+- The language switcher is `features/switch-language`, rendered in the header.
+
 ## API (served by MSW in dev and tests)
 
 | Method | Path | |

@@ -1,61 +1,68 @@
-import { CATEGORIES, categoryWithEmoji } from '@/shared/config'
-import { ORDER_STATUSES, ORDER_STATUS_META, DELIVERY_META, type DeliveryType } from '@/entities/order'
-import { ROLES, ROLE_META } from '@/entities/user'
+import type { TFunction } from 'i18next'
+import { CATEGORIES, categoryEmoji } from '@/shared/config'
+import { DELIVERY_TYPES, ORDER_STATUSES } from '@/entities/order'
+import { ROLES } from '@/entities/user'
 import type { FieldDef, FieldOption } from './types'
 
 type Named = { id: number; name: string }
 
 const toOptions = (items: Named[]): FieldOption[] => items.map((x) => ({ value: x.id, label: x.name }))
-const categoryOptions: FieldOption[] = CATEGORIES.map((c) => ({ value: c, label: categoryWithEmoji(c) }))
+const categoryOptions = (t: TFunction): FieldOption[] =>
+  CATEGORIES.map((c) => ({ value: c, label: `${categoryEmoji(c)} ${t(`categories.${c}`)}` }))
 
-export function shopFields(users: Named[]): FieldDef[] {
+export function shopFields(t: TFunction, users: Named[]): FieldDef[] {
   return [
-    { key: 'name', label: 'Shop name', type: 'text' },
-    { key: 'ownerId', label: 'Owner', type: 'choice', options: toOptions(users) },
-    { key: 'categories', label: 'Categories', type: 'multi', options: categoryOptions },
-    { key: 'commission', label: 'Platform commission', type: 'number', suffix: '%' },
-    { key: 'suspended', label: 'Status', type: 'toggle', hint: 'Suspended — hidden from buyers' },
+    { key: 'name', label: t('edit.fields.shopName'), type: 'text' },
+    { key: 'ownerId', label: t('edit.fields.owner'), type: 'choice', options: toOptions(users) },
+    { key: 'categories', label: t('edit.fields.categories'), type: 'multi', options: categoryOptions(t) },
+    { key: 'commission', label: t('edit.fields.commission'), type: 'number', suffix: '%' },
+    { key: 'suspended', label: t('edit.fields.status'), type: 'toggle', hint: t('edit.fields.suspendedHint') },
   ]
 }
 
-export function productFields(shops: Named[]): FieldDef[] {
+export function productFields(t: TFunction, shops: Named[]): FieldDef[] {
   return [
-    { key: 'name', label: 'Product name', type: 'text' },
-    { key: 'shopId', label: 'Shop', type: 'choice', options: toOptions(shops) },
-    { key: 'category', label: 'Category', type: 'choice', options: categoryOptions },
-    { key: 'price', label: 'Price', type: 'number', suffix: 'UZS' },
-    { key: 'discount', label: 'Discount', type: 'number', suffix: '%' },
-    { key: 'stock', label: 'Stock', type: 'number', suffix: 'pcs' },
-    { key: 'hidden', label: 'Visibility', type: 'toggle', hint: 'Hidden from buyers' },
+    { key: 'name', label: t('edit.fields.productName'), type: 'text' },
+    { key: 'shopId', label: t('edit.fields.shop'), type: 'choice', options: toOptions(shops) },
+    { key: 'category', label: t('edit.fields.category'), type: 'choice', options: categoryOptions(t) },
+    { key: 'price', label: t('edit.fields.price'), type: 'number', suffix: t('common.currency') },
+    { key: 'discount', label: t('edit.fields.discount'), type: 'number', suffix: '%' },
+    { key: 'stock', label: t('edit.fields.stock'), type: 'number', suffix: t('common.pcsUnit') },
+    { key: 'hidden', label: t('edit.fields.visibility'), type: 'toggle', hint: t('edit.fields.hiddenHint') },
   ]
 }
 
-export function orderFields(users: Named[], shops: Named[]): FieldDef[] {
+export function orderFields(t: TFunction, users: Named[], shops: Named[]): FieldDef[] {
   return [
     {
       key: 'status',
-      label: 'Status',
+      label: t('edit.fields.status'),
       type: 'choice',
-      options: ORDER_STATUSES.map((s) => ({ value: s, label: ORDER_STATUS_META[s].tab })),
+      options: ORDER_STATUSES.map((s) => ({ value: s, label: t(`orders.status.${s}.tab`) })),
     },
     {
       key: 'deliveryType',
-      label: 'Delivery type',
+      label: t('edit.fields.deliveryType'),
       type: 'choice',
-      options: (Object.keys(DELIVERY_META) as DeliveryType[]).map((d) => ({ value: d, label: DELIVERY_META[d].title })),
+      options: DELIVERY_TYPES.map((d) => ({ value: d, label: t(`orders.delivery.${d}.title`) })),
     },
-    { key: 'userId', label: 'Customer', type: 'choice', options: toOptions(users) },
-    { key: 'shopId', label: 'Shop', type: 'choice', options: toOptions(shops) },
-    { key: 'items', label: 'Items', type: 'text' },
-    { key: 'total', label: 'Total', type: 'number', suffix: 'UZS' },
+    { key: 'userId', label: t('edit.fields.customer'), type: 'choice', options: toOptions(users) },
+    { key: 'shopId', label: t('edit.fields.shop'), type: 'choice', options: toOptions(shops) },
+    { key: 'items', label: t('edit.fields.items'), type: 'text' },
+    { key: 'total', label: t('edit.fields.total'), type: 'number', suffix: t('common.currency') },
   ]
 }
 
-export function userFields(): FieldDef[] {
+export function userFields(t: TFunction): FieldDef[] {
   return [
-    { key: 'name', label: 'Full name', type: 'text' },
-    { key: 'phone', label: 'Phone', type: 'text' },
-    { key: 'roles', label: 'Roles', type: 'multi', options: ROLES.map((r) => ({ value: r, label: ROLE_META[r].title })) },
-    { key: 'blocked', label: 'Access', type: 'toggle', hint: "Blocked — can't log in or order" },
+    { key: 'name', label: t('edit.fields.fullName'), type: 'text' },
+    { key: 'phone', label: t('edit.fields.phone'), type: 'text' },
+    {
+      key: 'roles',
+      label: t('edit.fields.roles'),
+      type: 'multi',
+      options: ROLES.map((r) => ({ value: r, label: t(`users.roles.${r}.title`) })),
+    },
+    { key: 'blocked', label: t('edit.fields.access'), type: 'toggle', hint: t('edit.fields.blockedHint') },
   ]
 }

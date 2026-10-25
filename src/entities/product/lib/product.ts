@@ -13,13 +13,16 @@ export function getProductStatus(product: Pick<Product, 'hidden' | 'stock'>, sho
   return 'ACTIVE'
 }
 
-export function getProductBadge(status: ProductStatus, shopSuspended: boolean): { label: string; tone: PillTone } {
+export type ProductBadgeKey = ProductStatus | 'SHOP_SUSPENDED'
+
+/** Badge for the status column; `key` is a `products.badge.*` translation key. */
+export function getProductBadge(status: ProductStatus, shopSuspended: boolean): { key: ProductBadgeKey; tone: PillTone } {
   switch (status) {
     case 'HIDDEN':
-      return { label: shopSuspended ? 'SHOP SUSPENDED' : 'HIDDEN', tone: 'rose' }
+      return { key: shopSuspended ? 'SHOP_SUSPENDED' : 'HIDDEN', tone: 'rose' }
     case 'OUT':
-      return { label: 'OUT OF STOCK', tone: 'stockOut' }
+      return { key: 'OUT', tone: 'stockOut' }
     case 'ACTIVE':
-      return { label: 'IN STOCK', tone: 'success' }
+      return { key: 'ACTIVE', tone: 'success' }
   }
 }

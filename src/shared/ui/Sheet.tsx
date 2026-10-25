@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { X } from 'lucide-react'
 import { Dialog } from 'radix-ui'
+import { useLocale } from '@/shared/i18n'
 
 interface SheetProps {
   open: boolean
@@ -14,13 +15,14 @@ interface SheetProps {
 
 /** Right-side panel on a dimmed backdrop (Radix Dialog), styled after the design's edit drawer. */
 export function Sheet({ open, onOpenChange, title, eyebrow, description, footer, children }: SheetProps) {
+  const { t } = useLocale()
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-60 bg-black/50" />
         <Dialog.Content className="fixed top-0 right-0 bottom-0 z-61 flex w-[460px] max-w-full animate-pop flex-col rounded-l-[32px] bg-background shadow-[0_1px_3px_0_hsl(0_0%_0%/0.25),-12px_0_48px_-12px_hsl(0_0%_0%/0.25)] outline-none">
           <Dialog.Close
-            aria-label="Close"
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 flex size-6 items-center justify-center border-none bg-transparent text-foreground opacity-70 hover:opacity-100"
           >
             <X className="size-4" />

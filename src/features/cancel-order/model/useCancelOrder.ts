@@ -1,7 +1,9 @@
 import { isCancellable, useUpdateOrderMutation, type Order } from '@/entities/order'
+import { useLocale } from '@/shared/i18n'
 import { notify } from '@/shared/ui'
 
 export function useCancelOrder() {
+  const { t } = useLocale()
   const mutation = useUpdateOrderMutation()
 
   const cancel = (order: Order) => {
@@ -9,8 +11,9 @@ export function useCancelOrder() {
     mutation.mutate(
       { id: order.id, patch: { status: 'CANCELLED' } },
       {
-        onSuccess: () => notify(`Order #${order.id} cancelled`, 'Customer and shop have been notified.', 'danger'),
-        onError: (e) => notify('Could not cancel order', e.message, 'danger'),
+        onSuccess: () =>
+          notify(t('orders.toast.cancelledTitle', { id: order.id }), t('orders.toast.cancelledDesc'), 'danger'),
+        onError: (e) => notify(t('orders.toast.failed'), e.message, 'danger'),
       },
     )
   }

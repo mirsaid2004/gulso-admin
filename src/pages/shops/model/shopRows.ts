@@ -2,11 +2,7 @@ import type { Shop } from '@/entities/shop'
 
 export type ShopTab = 'ALL' | 'ACTIVE' | 'SUSPENDED'
 
-export const SHOP_TABS: Array<{ key: ShopTab; label: string }> = [
-  { key: 'ALL', label: 'All' },
-  { key: 'ACTIVE', label: 'Active' },
-  { key: 'SUSPENDED', label: 'Suspended' },
-]
+export const SHOP_TABS: ShopTab[] = ['ALL', 'ACTIVE', 'SUSPENDED']
 
 export function matchesShopTab(shop: Pick<Shop, 'suspended'>, tab: ShopTab): boolean {
   if (tab === 'ALL') return true

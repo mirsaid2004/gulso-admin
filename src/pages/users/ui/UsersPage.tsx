@@ -1,6 +1,6 @@
 import { BlockedTag, RoleTag } from '@/entities/user'
 import { EditEntityDrawer } from '@/features/edit-entity'
-import { PAGE_META } from '@/shared/config'
+import { useLocale } from '@/shared/i18n'
 import {
   DataTable,
   EditButton,
@@ -17,35 +17,35 @@ import {
 } from '@/shared/ui'
 import { useUsersViewModel } from '../model/useUsersViewModel'
 
-const meta = PAGE_META.users
-
-const COLUMNS = [
-  { key: 'user', label: 'User' },
-  { key: 'phone', label: 'Phone' },
-  { key: 'roles', label: 'Roles' },
-  { key: 'shops', label: 'Shops' },
-  { key: 'orders', label: 'Orders' },
-  { key: 'joined', label: 'Joined' },
-  { key: 'actions', label: <span className="sr-only">Actions</span> },
-]
+const COLUMN_KEYS = ['user', 'phone', 'roles', 'shops', 'orders', 'joined'] as const
 
 export function UsersPage() {
+  const { t } = useLocale()
   const vm = useUsersViewModel()
+  const columns = [
+    ...COLUMN_KEYS.map((key) => ({ key, label: t(`users.columns.${key}`) })),
+    { key: 'actions', label: <span className="sr-only">{t('common.actions')}</span> },
+  ]
 
   return (
     <>
       <PageHeader
-        title={meta.title}
-        subtitle={meta.subtitle}
+        title={t('pages.users.title')}
+        subtitle={t('pages.users.subtitle')}
         actions={
-          <SearchInput value={vm.search} onValueChange={vm.setSearch} placeholder={meta.searchPlaceholder} aria-label="Search users" />
+          <SearchInput
+            value={vm.search}
+            onValueChange={vm.setSearch}
+            placeholder={t('pages.users.searchPlaceholder')}
+            aria-label={t('pages.users.searchLabel')}
+          />
         }
       />
       <Toolbar>
-        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label="User type" />
+        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label={t('users.tabsLabel')} />
       </Toolbar>
 
-      <DataTable columns={COLUMNS} empty={!vm.isLoading && !vm.rows.length && <EmptyState>No users found</EmptyState>}>
+      <DataTable columns={columns} empty={!vm.isLoading && !vm.rows.length && <EmptyState>{t('users.empty')}</EmptyState>}>
         {vm.rows.map(({ user, joined, shops, orderCount, canBlock, isToggling }) => (
           <Tr key={user.id} className={user.blocked ? 'opacity-60' : undefined}>
             <Td className="py-3.5">
@@ -77,7 +77,7 @@ export function UsersPage() {
                     disabled={isToggling}
                     onClick={() => vm.toggleBlock(user)}
                   >
-                    {user.blocked ? 'Unblock' : 'Block'}
+                    {user.blocked ? t('users.unblock') : t('users.block')}
                   </RowActionButton>
                 )}
                 <EditButton onClick={() => vm.edit(user)} />

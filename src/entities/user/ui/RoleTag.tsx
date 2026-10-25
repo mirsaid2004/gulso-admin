@@ -1,19 +1,22 @@
+import { useLocale } from '@/shared/i18n'
 import { Pill } from '@/shared/ui'
-import { ROLE_META } from '../model/constants'
+import { ROLE_TONE } from '../model/constants'
 import type { Role } from '../model/types'
 
 export function RoleTag({ role }: { role: Role }) {
+  const { t } = useLocale()
   return (
-    <Pill shape="tag" tone={ROLE_META[role].tone}>
-      {ROLE_META[role].label}
+    <Pill shape="tag" tone={ROLE_TONE[role]}>
+      {t(`users.roles.${role}.tag`)}
     </Pill>
   )
 }
 
 export function BlockedTag() {
+  const { t } = useLocale()
   return (
     <Pill shape="tag" tone="rose">
-      BLOCKED
+      {t('users.blockedTag')}
     </Pill>
   )
 }

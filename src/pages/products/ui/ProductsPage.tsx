@@ -1,6 +1,6 @@
 import { EditEntityDrawer } from '@/features/edit-entity'
-import { PAGE_META } from '@/shared/config'
-import { cn, formatUzs } from '@/shared/lib'
+import { useLocale } from '@/shared/i18n'
+import { cn } from '@/shared/lib'
 import {
   DataTable,
   EditButton,
@@ -18,37 +18,39 @@ import {
 } from '@/shared/ui'
 import { useProductsViewModel } from '../model/useProductsViewModel'
 
-const meta = PAGE_META.products
-
-const COLUMNS = [
-  { key: 'product', label: 'Product' },
-  { key: 'shop', label: 'Shop' },
-  { key: 'price', label: 'Price' },
-  { key: 'stock', label: 'Stock' },
-  { key: 'rating', label: 'Rating' },
-  { key: 'status', label: 'Status' },
-  { key: 'actions', label: <span className="sr-only">Actions</span> },
-]
+const COLUMN_KEYS = ['product', 'shop', 'price', 'stock', 'rating', 'status'] as const
 
 export function ProductsPage() {
+  const { t } = useLocale()
   const vm = useProductsViewModel()
+  const columns = [
+    ...COLUMN_KEYS.map((key) => ({ key, label: t(`products.columns.${key}`) })),
+    { key: 'actions', label: <span className="sr-only">{t('common.actions')}</span> },
+  ]
 
   return (
     <>
       <PageHeader
-        title={meta.title}
-        subtitle={meta.subtitle}
+        title={t('pages.products.title')}
+        subtitle={t('pages.products.subtitle')}
         actions={
-          <SearchInput value={vm.search} onValueChange={vm.setSearch} placeholder={meta.searchPlaceholder} aria-label="Search products" />
+          <SearchInput
+            value={vm.search}
+            onValueChange={vm.setSearch}
+            placeholder={t('pages.products.searchPlaceholder')}
+            aria-label={t('pages.products.searchLabel')}
+          />
         }
       />
       <Toolbar>
-        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label="Product status" />
-        {vm.shopFilterName && <FilterChip label={`Shop: ${vm.shopFilterName}`} onClear={vm.clearShopFilter} />}
+        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label={t('products.tabsLabel')} />
+        {vm.shopFilterName && (
+          <FilterChip label={t('common.shopFilter', { name: vm.shopFilterName })} onClear={vm.clearShopFilter} />
+        )}
       </Toolbar>
 
-      <DataTable columns={COLUMNS} empty={!vm.isLoading && !vm.rows.length && <EmptyState>No results</EmptyState>}>
-        {vm.rows.map(({ product, shopName, category, price, status, badge, isToggling }) => (
+      <DataTable columns={columns} empty={!vm.isLoading && !vm.rows.length && <EmptyState>{t('products.empty')}</EmptyState>}>
+        {vm.rows.map(({ product, shopName, category, price, stock, status, badge, isToggling }) => (
           <Tr key={product.id}>
             <Td className="py-3">
               <div className="flex items-center gap-3">
@@ -78,14 +80,14 @@ export function ProductsPage() {
               </button>
             </Td>
             <Td className="py-3 whitespace-nowrap">
-              <span className="text-sm font-black text-primary italic">{formatUzs(price)}</span>
+              <span className="text-sm font-black text-primary italic">{price}</span>
               {product.discount > 0 && (
                 <Pill tone="danger" className="ml-1.5 rounded-md px-1.5 py-0.5 text-[9px]">
                   -{product.discount}%
                 </Pill>
               )}
             </Td>
-            <Td className="py-3 text-sm font-bold whitespace-nowrap text-slate-600">{product.stock} pcs</Td>
+            <Td className="py-3 text-sm font-bold whitespace-nowrap text-slate-600">{stock}</Td>
             <Td className="py-3 text-sm font-bold whitespace-nowrap text-slate-600">
               ★ {product.rating} <span className="font-medium text-slate-400">({product.reviewCount})</span>
             </Td>
@@ -101,7 +103,7 @@ export function ProductsPage() {
                   disabled={isToggling}
                   onClick={() => vm.toggleVisibility(product)}
                 >
-                  {product.hidden ? 'Unhide' : 'Hide'}
+                  {product.hidden ? t('products.unhide') : t('products.hide')}
                 </RowActionButton>
                 <EditButton onClick={() => vm.edit(product)} />
               </RowActions>

@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react'
+import { useLocale } from '@/shared/i18n'
 import { cn } from '@/shared/lib'
 import { SectionLabel } from '@/shared/ui'
 import type { ReviewShopRequestModel } from '../model/useReviewShopRequest'
@@ -6,9 +7,10 @@ import type { ReviewShopRequestModel } from '../model/useReviewShopRequest'
 type Props = Pick<ReviewShopRequestModel, 'checks' | 'toggleCheck'>
 
 export function VerificationChecks({ checks, toggleCheck }: Props) {
+  const { t } = useLocale()
   return (
     <div className="mx-8 mb-6 flex flex-col gap-3">
-      <SectionLabel>Verification checks</SectionLabel>
+      <SectionLabel>{t('review.checksTitle')}</SectionLabel>
       <div className="flex flex-wrap gap-2">
         {checks.map((c) => (
           <button

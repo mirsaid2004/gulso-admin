@@ -1,10 +1,10 @@
 import { ClipboardCheck, Package, ShoppingCart, Store, Users, type LucideIcon } from 'lucide-react'
-import { PAGE_META, ROUTES, type RouteKey } from '@/shared/config'
+import { ROUTES, type RouteKey } from '@/shared/config'
 
 export interface NavItem {
+  /** Also the `pages.<key>` translation namespace */
   key: RouteKey
   to: string
-  label: string
   icon: LucideIcon
 }
 
@@ -19,6 +19,5 @@ const ICONS: Record<RouteKey, LucideIcon> = {
 export const NAV_ITEMS: NavItem[] = (Object.keys(ROUTES) as RouteKey[]).map((key) => ({
   key,
   to: ROUTES[key],
-  label: PAGE_META[key].title,
   icon: ICONS[key],
 }))

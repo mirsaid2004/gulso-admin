@@ -24,11 +24,7 @@ describe('getRequestNote', () => {
   })
 
   it('shows the previous note on a resubmitted pending request', () => {
-    expect(getRequestNote(request({ previousNote: 'Fix STIR' }))).toEqual({
-      kind: 'resubmitted',
-      label: 'Previous note — seller resubmitted',
-      text: 'Fix STIR',
-    })
+    expect(getRequestNote(request({ previousNote: 'Fix STIR' }))).toEqual({ kind: 'resubmitted', text: 'Fix STIR' })
   })
 
   it('ignores a stale decision note while pending', () => {
@@ -36,11 +32,11 @@ describe('getRequestNote', () => {
   })
 
   it.each([
-    ['CHANGES_REQUESTED', 'changes', 'Note sent to seller'],
-    ['REJECTED', 'rejected', 'Rejection reason'],
-    ['APPROVED', 'approved', 'Decision'],
-  ] as const)('labels a %s decision', (status, kind, label) => {
-    expect(getRequestNote(request({ status, note: 'Because' }))).toEqual({ kind, label, text: 'Because' })
+    ['CHANGES_REQUESTED', 'changes'],
+    ['REJECTED', 'rejected'],
+    ['APPROVED', 'approved'],
+  ] as const)('classifies a %s decision note as %s', (status, kind) => {
+    expect(getRequestNote(request({ status, note: 'Because' }))).toEqual({ kind, text: 'Because' })
   })
 
   it('is null for a decision without a note', () => {

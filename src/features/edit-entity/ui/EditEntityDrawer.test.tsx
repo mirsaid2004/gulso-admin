@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { i18n } from '@/shared/i18n'
 import { EditEntityDrawer } from './EditEntityDrawer'
 import { shopFields, userFields } from '../model/schemas'
 
@@ -15,7 +16,7 @@ function renderShopDrawer(onSave = vi.fn(), onClose = vi.fn()) {
     <EditEntityDrawer
       kind="shop"
       entityId={4}
-      fields={shopFields(users)}
+      fields={shopFields(i18n.t, users)}
       original={shop}
       onSave={onSave}
       onClose={onClose}
@@ -71,7 +72,7 @@ describe('EditEntityDrawer', () => {
       <EditEntityDrawer
         kind="user"
         entityId={131}
-        fields={userFields()}
+        fields={userFields(i18n.t)}
         original={{ id: 131, name: 'Kamola', phone: '+998', roles: ['USER'], blocked: false }}
         onSave={() => {}}
         onClose={() => {}}

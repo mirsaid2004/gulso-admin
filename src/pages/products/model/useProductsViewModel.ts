@@ -9,11 +9,12 @@ import {
 import { findShop, useShopsQuery } from '@/entities/shop'
 import { useToggleProductVisibility } from '@/features/moderate-product'
 import { productFields, toDraft, useEntityEditor } from '@/features/edit-entity'
-import { categoryLabel } from '@/shared/config'
+import { useLocale } from '@/shared/i18n'
 import { matchesQuery, useShopFilterParam } from '@/shared/lib'
 import { matchesProductTab, PRODUCT_TABS, type ProductTab } from './productTabs'
 
 export function useProductsViewModel() {
+  const { t, money } = useLocale()
   const productsQuery = useProductsQuery()
   const shopsQuery = useShopsQuery()
   const visibility = useToggleProductVisibility()
@@ -36,15 +37,19 @@ export function useProductsViewModel() {
 
   const rows = scoped
     .filter(({ product, shop, status }) => matchesProductTab(status, tab) && matchesQuery(search, product.name, shop.name))
-    .map(({ product, shop, status }) => ({
-      product,
-      shopName: shop.name,
-      category: categoryLabel(product.category),
-      price: discountedPrice(product),
-      status,
-      badge: getProductBadge(status, shop.suspended),
-      isToggling: visibility.pendingId === product.id,
-    }))
+    .map(({ product, shop, status }) => {
+      const badge = getProductBadge(status, shop.suspended)
+      return {
+        product,
+        shopName: shop.name,
+        category: t(`categories.${product.category}`),
+        price: money(discountedPrice(product)),
+        stock: t('common.pcs', { count: product.stock }),
+        status,
+        badge: { tone: badge.tone, label: t(`products.badge.${badge.key}`) },
+        isToggling: visibility.pendingId === product.id,
+      }
+    })
 
   const editing = editor.target && products.find((p) => p.id === editor.target!.id)
 
@@ -54,7 +59,11 @@ export function useProductsViewModel() {
     setSearch,
     tab,
     setTab,
-    tabs: PRODUCT_TABS.map((t) => ({ ...t, count: scoped.filter((x) => matchesProductTab(x.status, t.key)).length })),
+    tabs: PRODUCT_TABS.map((key) => ({
+      key,
+      label: t(`products.tabs.${key}`),
+      count: scoped.filter((x) => matchesProductTab(x.status, key)).length,
+    })),
     rows,
     shopFilterName: shopFilter != null ? findShop(shops, shopFilter).name : null,
     clearShopFilter: () => setShopFilter(null),
@@ -62,6 +71,6 @@ export function useProductsViewModel() {
     toggleVisibility: visibility.toggle,
     edit: (product: Product) => editor.open({ kind: 'product', id: product.id }),
     editor,
-    editing: editing ? { id: editing.id, original: toDraft(editing), fields: productFields(shops) } : null,
+    editing: editing ? { id: editing.id, original: toDraft(editing), fields: productFields(t, shops) } : null,
   }
 }

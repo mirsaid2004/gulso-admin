@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { usePendingRequestCount } from '@/entities/shop-request'
 import { useViewerQuery } from '@/entities/viewer'
-import { PAGE_META, routeKeyFromPath } from '@/shared/config'
+import { routeKeyFromPath } from '@/shared/config'
+import { useLocale } from '@/shared/i18n'
 
 export function useAdminLayoutViewModel() {
+  const { t } = useLocale()
   const { pathname } = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const pendingCount = usePendingRequestCount()
@@ -16,6 +18,6 @@ export function useAdminLayoutViewModel() {
     toggleSidebar: () => setSidebarOpen((open) => !open),
     pendingCount,
     viewer,
-    pageTitle: routeKey ? PAGE_META[routeKey].title : '',
+    pageTitle: routeKey ? t(`pages.${routeKey}.title`) : '',
   }
 }

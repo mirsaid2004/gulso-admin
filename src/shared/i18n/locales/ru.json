@@ -1,0 +1,388 @@
+{
+  "common": {
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "edit": "Редактировать",
+    "actions": "Действия",
+    "currency": "сум",
+    "pcs": "{{count}} шт",
+    "pcsUnit": "шт",
+    "clearFilter": "Сбросить фильтр: {{label}}",
+    "shopFilter": "Магазин: {{name}}",
+    "language": "Язык"
+  },
+  "categories": {
+    "FLOWERS": "Цветы",
+    "GIFTS": "Подарки",
+    "BAKERY": "Выпечка"
+  },
+  "age": {
+    "now": "сейчас",
+    "minutes": "{{count}} мин",
+    "hours": "{{count}} ч",
+    "days": "{{count}} д"
+  },
+  "layout": {
+    "brand": "Gulso 1.0",
+    "panel": "Панель администратора",
+    "mainNav": "Главное меню",
+    "breadcrumb": "Навигация",
+    "toggleSidebar": "Показать/скрыть боковую панель",
+    "logout": "Выйти",
+    "notifications": "Уведомления",
+    "pendingRequests_one": "{{count}} заявка магазина ожидает",
+    "pendingRequests_few": "{{count}} заявки магазинов ожидают",
+    "pendingRequests_many": "{{count}} заявок магазинов ожидают",
+    "pendingRequests_other": "{{count}} заявки магазинов ожидают",
+    "pendingBadge": "Ожидают: {{count}}"
+  },
+  "pages": {
+    "requests": {
+      "title": "Заявки магазинов",
+      "subtitle": "Новые магазины ждут подтверждения перед открытием",
+      "searchPlaceholder": "Магазин или владелец...",
+      "searchLabel": "Поиск заявок магазинов"
+    },
+    "shops": {
+      "title": "Магазины",
+      "subtitle": "Все магазины Gulso",
+      "searchPlaceholder": "Поиск магазинов...",
+      "searchLabel": "Поиск магазинов"
+    },
+    "products": {
+      "title": "Товары",
+      "subtitle": "Все товары всех магазинов",
+      "searchPlaceholder": "Поиск товаров...",
+      "searchLabel": "Поиск товаров"
+    },
+    "orders": {
+      "title": "Заказы",
+      "subtitle": "Все заказы всех магазинов",
+      "searchPlaceholder": "№ заказа, клиент или телефон...",
+      "searchLabel": "Поиск заказов"
+    },
+    "users": {
+      "title": "Пользователи",
+      "subtitle": "Покупатели, продавцы и администраторы",
+      "searchPlaceholder": "Имя или телефон...",
+      "searchLabel": "Поиск пользователей"
+    }
+  },
+  "requests": {
+    "tabsLabel": "Статус заявки",
+    "status": {
+      "PENDING": {
+        "badge": "НА ПРОВЕРКЕ",
+        "tab": "Ожидают"
+      },
+      "CHANGES_REQUESTED": {
+        "badge": "НУЖНЫ ИСПРАВЛЕНИЯ",
+        "tab": "Нужны исправления"
+      },
+      "APPROVED": {
+        "badge": "ОДОБРЕНА",
+        "tab": "Одобренные"
+      },
+      "REJECTED": {
+        "badge": "ОТКЛОНЕНА",
+        "tab": "Отклонённые"
+      }
+    },
+    "empty": "Здесь пусто",
+    "resubmitted": "ПОВТОРНО",
+    "applicationLabel": "Заявка {{name}}",
+    "application": "Заявка #A-{{id}} · подана {{date}}",
+    "sections": {
+      "owner": "Владелец",
+      "shop": "Магазин",
+      "contact": "Контакты и юр. данные",
+      "documents": "Документы"
+    },
+    "fields": {
+      "phone": "Телефон",
+      "address": "Адрес самовывоза",
+      "legalEntity": "Форма организации",
+      "stir": "ИНН (STIR)"
+    },
+    "legalEntity": {
+      "LLC": "ООО (MChJ)",
+      "YATT": "Индивидуальный предприниматель (YaTT)"
+    },
+    "ownerTag": {
+      "blocked": "Заблокированный пользователь",
+      "existing_one": "Действующий продавец · {{count}} магазин: {{shops}}",
+      "existing_few": "Действующий продавец · {{count}} магазина: {{shops}}",
+      "existing_many": "Действующий продавец · {{count}} магазинов: {{shops}}",
+      "existing_other": "Действующий продавец · {{count}} магазина: {{shops}}",
+      "first": "Первый магазин · новый продавец"
+    },
+    "note": {
+      "resubmitted": "Предыдущий комментарий — продавец отправил повторно",
+      "changes": "Комментарий продавцу",
+      "rejected": "Причина отказа",
+      "approved": "Решение"
+    },
+    "openDocument": "Открыть"
+  },
+  "review": {
+    "checksTitle": "Проверки",
+    "checks": {
+      "docs": "Документы читаемы",
+      "stir": "ИНН совпадает со свидетельством",
+      "addr": "Адрес проверен"
+    },
+    "hintProgress": "Выполнено проверок: {{done}} из {{total}} — завершите все, чтобы одобрить",
+    "hintDone": "Все проверки пройдены",
+    "reject": "Отклонить",
+    "requestChanges": "Запросить исправления",
+    "approve": "Одобрить и открыть магазин",
+    "composer": {
+      "changes": {
+        "label": "Что продавцу нужно исправить?",
+        "placeholder": "Напишите комментарий для продавца",
+        "submit": "Отправить продавцу",
+        "presets": {
+          "unreadable": {
+            "label": "Нечитаемый документ",
+            "text": "Фото свидетельства о регистрации нечитаемо. Загрузите, пожалуйста, чёткий скан или PDF."
+          },
+          "stir": {
+            "label": "ИНН не совпадает",
+            "text": "ИНН в заявке не совпадает со свидетельством. Проверьте, пожалуйста."
+          },
+          "address": {
+            "label": "Неполный адрес",
+            "text": "Укажите, пожалуйста, полный адрес самовывоза с номером дома."
+          }
+        }
+      },
+      "reject": {
+        "label": "Причина отказа",
+        "placeholder": "Заявитель увидит эту причину",
+        "submit": "Отклонить заявку",
+        "presets": {
+          "duplicate": {
+            "label": "Дубликат аккаунта",
+            "text": "Дубликат существующего или заблокированного аккаунта."
+          },
+          "prohibited": {
+            "label": "Запрещённые товары",
+            "text": "Указанные товары запрещены на Gulso."
+          },
+          "unverifiable": {
+            "label": "Документы не проверены",
+            "text": "Нам не удалось проверить отправленные документы."
+          }
+        }
+      }
+    },
+    "toast": {
+      "approvedTitle": "{{name}} одобрен",
+      "approvedDesc": "Теперь магазин открывается в аккаунте продавца {{owner}}.",
+      "approveFailed": "Не удалось одобрить",
+      "changesTitle": "Исправления запрошены",
+      "changesDesc": "{{owner}} увидит ваш комментарий.",
+      "rejectedTitle": "{{name}} отклонён",
+      "rejectedDesc": "Заявитель уведомлён.",
+      "sendFailed": "Не удалось отправить"
+    }
+  },
+  "shops": {
+    "tabsLabel": "Статус магазина",
+    "tabs": {
+      "ALL": "Все",
+      "ACTIVE": "Активные",
+      "SUSPENDED": "Приостановленные"
+    },
+    "columns": {
+      "shop": "Магазин",
+      "owner": "Владелец",
+      "products": "Товары",
+      "orders": "Заказы",
+      "revenue": "Выручка",
+      "status": "Статус"
+    },
+    "status": {
+      "ACTIVE": "АКТИВЕН",
+      "NEW": "НОВЫЙ",
+      "SUSPENDED": "ПРИОСТАНОВЛЕН"
+    },
+    "productsOf": "{{name}}: товаров — {{count}}",
+    "ordersOf": "{{name}}: заказов — {{count}}",
+    "suspend": "Приостановить",
+    "reactivate": "Возобновить",
+    "empty": "Магазины не найдены",
+    "toast": {
+      "suspendedTitle": "{{name}} приостановлен",
+      "suspendedDesc": "Его товары скрыты от покупателей.",
+      "reactivatedTitle": "{{name}} возобновлён",
+      "reactivatedDesc": "Его товары снова видны.",
+      "failed": "Не удалось обновить магазин"
+    }
+  },
+  "products": {
+    "tabsLabel": "Статус товара",
+    "tabs": {
+      "ALL": "Все",
+      "ACTIVE": "В наличии",
+      "OUT": "Нет в наличии",
+      "HIDDEN": "Скрытые"
+    },
+    "columns": {
+      "product": "Товар",
+      "shop": "Магазин",
+      "price": "Цена",
+      "stock": "Остаток",
+      "rating": "Рейтинг",
+      "status": "Статус"
+    },
+    "badge": {
+      "ACTIVE": "В НАЛИЧИИ",
+      "OUT": "НЕТ В НАЛИЧИИ",
+      "HIDDEN": "СКРЫТ",
+      "SHOP_SUSPENDED": "МАГАЗИН ПРИОСТАНОВЛЕН"
+    },
+    "hide": "Скрыть",
+    "unhide": "Показать",
+    "empty": "Ничего не найдено",
+    "failed": "Не удалось обновить товар"
+  },
+  "orders": {
+    "tabsLabel": "Статус заказа",
+    "all": "Все",
+    "columns": {
+      "order": "Заказ",
+      "customer": "Клиент",
+      "shop": "Магазин",
+      "items": "Состав",
+      "total": "Сумма",
+      "commission": "Комиссия",
+      "status": "Статус"
+    },
+    "status": {
+      "ACCEPTED": {
+        "label": "ПРИНЯТ",
+        "tab": "Новые"
+      },
+      "PREPARING": {
+        "label": "ГОТОВИТСЯ",
+        "tab": "Готовится"
+      },
+      "IN_DELIVERY": {
+        "label": "ДОСТАВЛЯЕТСЯ",
+        "tab": "Доставляется"
+      },
+      "COMPLETED": {
+        "label": "ВЫПОЛНЕН",
+        "tab": "Завершённые"
+      },
+      "CANCELLED": {
+        "label": "ОТМЕНЁН",
+        "tab": "Отменённые"
+      }
+    },
+    "delivery": {
+      "DELIVERY": {
+        "label": "ДОСТАВКА",
+        "title": "Доставка"
+      },
+      "PICKUP": {
+        "label": "САМОВЫВОЗ",
+        "title": "Самовывоз"
+      }
+    },
+    "orderNumber": "Заказ #{{id}}",
+    "cancel": "Отменить",
+    "empty": "Заказы не найдены",
+    "toast": {
+      "cancelledTitle": "Заказ #{{id}} отменён",
+      "cancelledDesc": "Клиент и магазин уведомлены.",
+      "failed": "Не удалось отменить заказ"
+    }
+  },
+  "users": {
+    "tabsLabel": "Тип пользователя",
+    "tabs": {
+      "ALL": "Все",
+      "USER": "Покупатели",
+      "SELLER": "Продавцы",
+      "ADMIN": "Администраторы",
+      "BLOCKED": "Заблокированные"
+    },
+    "columns": {
+      "user": "Пользователь",
+      "phone": "Телефон",
+      "roles": "Роли",
+      "shops": "Магазины",
+      "orders": "Заказы",
+      "joined": "Регистрация"
+    },
+    "roles": {
+      "USER": {
+        "tag": "ПОКУПАТЕЛЬ",
+        "title": "Покупатель"
+      },
+      "SELLER": {
+        "tag": "ПРОДАВЕЦ",
+        "title": "Продавец"
+      },
+      "ADMIN": {
+        "tag": "АДМИН",
+        "title": "Администратор"
+      }
+    },
+    "blockedTag": "ЗАБЛОКИРОВАН",
+    "block": "Заблокировать",
+    "unblock": "Разблокировать",
+    "empty": "Пользователи не найдены",
+    "failed": "Не удалось обновить пользователя"
+  },
+  "edit": {
+    "kind": {
+      "shop": "Магазин",
+      "product": "Товар",
+      "order": "Заказ",
+      "user": "Пользователь"
+    },
+    "eyebrow": "{{kind}} · ID {{id}}",
+    "description": "Изменения сразу применяются для покупателей и продавца.",
+    "edited": "ИЗМЕНЕНО",
+    "noChanges": "Нет изменений",
+    "changes_one": "{{count}} изменение",
+    "changes_few": "{{count}} изменения",
+    "changes_many": "{{count}} изменений",
+    "changes_other": "{{count}} изменения",
+    "save": "Сохранить",
+    "fields": {
+      "shopName": "Название магазина",
+      "owner": "Владелец",
+      "categories": "Категории",
+      "commission": "Комиссия платформы",
+      "status": "Статус",
+      "suspendedHint": "Приостановлен — скрыт от покупателей",
+      "productName": "Название товара",
+      "shop": "Магазин",
+      "category": "Категория",
+      "price": "Цена",
+      "discount": "Скидка",
+      "stock": "Остаток",
+      "visibility": "Видимость",
+      "hiddenHint": "Скрыт от покупателей",
+      "deliveryType": "Способ получения",
+      "customer": "Клиент",
+      "items": "Состав",
+      "total": "Сумма",
+      "fullName": "Полное имя",
+      "phone": "Телефон",
+      "roles": "Роли",
+      "access": "Доступ",
+      "blockedHint": "Заблокирован — не может войти и заказывать"
+    },
+    "toast": {
+      "updated": "{{label}}: изменения сохранены",
+      "sellerNotified": "Продавец уведомлён об изменении.",
+      "userNotified": "Пользователь увидит изменения при следующем входе.",
+      "failed": "Не удалось сохранить изменения"
+    }
+  }
+}

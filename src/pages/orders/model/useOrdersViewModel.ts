@@ -3,7 +3,6 @@ import {
   commissionAmount,
   isCancellable,
   ORDER_STATUSES,
-  ORDER_STATUS_META,
   useOrdersQuery,
   type Order,
   type OrderStatus,
@@ -12,13 +11,17 @@ import { findShop, useShopsQuery } from '@/entities/shop'
 import { findUser, useUsersQuery } from '@/entities/user'
 import { useCancelOrder } from '@/features/cancel-order'
 import { orderFields, toDraft, useEntityEditor } from '@/features/edit-entity'
+import { useLocale } from '@/shared/i18n'
 import { formatNumber, formatShortDateTime, matchesQuery, useShopFilterParam } from '@/shared/lib'
 
 export type OrderTab = 'ALL' | OrderStatus
 
+const ORDER_TABS: OrderTab[] = ['ALL', ...ORDER_STATUSES]
+
 const matchesOrderTab = (order: Order, tab: OrderTab) => tab === 'ALL' || order.status === tab
 
 export function useOrdersViewModel() {
+  const { t, language, money } = useLocale()
   const ordersQuery = useOrdersQuery()
   const usersQuery = useUsersQuery()
   const shopsQuery = useShopsQuery()
@@ -45,11 +48,15 @@ export function useOrdersViewModel() {
       const shop = findShop(shops, order.shopId)
       return {
         order,
-        date: formatShortDateTime(order.createdAt),
+        title: t('orders.orderNumber', { id: order.id }),
+        date: formatShortDateTime(order.createdAt, language),
         customerName: customer.name,
         customerPhone: customer.phone,
         shopName: shop.name,
+        total: money(order.total),
         commission: `${formatNumber(commissionAmount(order.total, shop.commission))} · ${shop.commission}%`,
+        statusLabel: t(`orders.status.${order.status}.label`),
+        deliveryLabel: t(`orders.delivery.${order.deliveryType}.label`),
         canCancel: isCancellable(order),
         isCancelling: cancellation.pendingId === order.id,
       }
@@ -63,9 +70,9 @@ export function useOrdersViewModel() {
     setSearch,
     tab,
     setTab,
-    tabs: (['ALL', ...ORDER_STATUSES] as OrderTab[]).map((key) => ({
+    tabs: ORDER_TABS.map((key) => ({
       key,
-      label: key === 'ALL' ? 'All' : ORDER_STATUS_META[key].tab,
+      label: key === 'ALL' ? t('orders.all') : t(`orders.status.${key}.tab`),
       count: scoped.filter((o) => matchesOrderTab(o, key)).length,
     })),
     rows,
@@ -75,6 +82,6 @@ export function useOrdersViewModel() {
     cancel: cancellation.cancel,
     edit: (order: Order) => editor.open({ kind: 'order', id: order.id }),
     editor,
-    editing: editing ? { id: editing.id, original: toDraft(editing), fields: orderFields(users, shops) } : null,
+    editing: editing ? { id: editing.id, original: toDraft(editing), fields: orderFields(t, users, shops) } : null,
   }
 }

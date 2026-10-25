@@ -1,7 +1,6 @@
-import { SHOP_STATUS_META } from '@/entities/shop'
+import { SHOP_STATUS_TONE } from '@/entities/shop'
 import { EditEntityDrawer } from '@/features/edit-entity'
-import { PAGE_META } from '@/shared/config'
-import { formatUzs } from '@/shared/lib'
+import { useLocale } from '@/shared/i18n'
 import {
   DataTable,
   EditButton,
@@ -20,36 +19,36 @@ import {
 } from '@/shared/ui'
 import { useShopsViewModel } from '../model/useShopsViewModel'
 
-const meta = PAGE_META.shops
-
-const COLUMNS = [
-  { key: 'shop', label: 'Shop' },
-  { key: 'owner', label: 'Owner' },
-  { key: 'products', label: 'Products' },
-  { key: 'orders', label: 'Orders' },
-  { key: 'revenue', label: 'Revenue' },
-  { key: 'status', label: 'Status' },
-  { key: 'actions', label: <span className="sr-only">Actions</span> },
-]
+const COLUMN_KEYS = ['shop', 'owner', 'products', 'orders', 'revenue', 'status'] as const
 
 export function ShopsPage() {
+  const { t } = useLocale()
   const vm = useShopsViewModel()
+  const columns = [
+    ...COLUMN_KEYS.map((key) => ({ key, label: t(`shops.columns.${key}`) })),
+    { key: 'actions', label: <span className="sr-only">{t('common.actions')}</span> },
+  ]
 
   return (
     <>
       <PageHeader
-        title={meta.title}
-        subtitle={meta.subtitle}
+        title={t('pages.shops.title')}
+        subtitle={t('pages.shops.subtitle')}
         actions={
-          <SearchInput value={vm.search} onValueChange={vm.setSearch} placeholder={meta.searchPlaceholder} aria-label="Search shops" />
+          <SearchInput
+            value={vm.search}
+            onValueChange={vm.setSearch}
+            placeholder={t('pages.shops.searchPlaceholder')}
+            aria-label={t('pages.shops.searchLabel')}
+          />
         }
       />
       <Toolbar>
-        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label="Shop status" />
+        <SegmentedTabs tabs={vm.tabs} value={vm.tab} onChange={vm.setTab} label={t('shops.tabsLabel')} />
       </Toolbar>
 
-      <DataTable columns={COLUMNS} empty={!vm.isLoading && !vm.rows.length && <EmptyState>No shops found</EmptyState>}>
-        {vm.rows.map(({ shop, ownerName, categories, status, stats, isToggling }) => (
+      <DataTable columns={columns} empty={!vm.isLoading && !vm.rows.length && <EmptyState>{t('shops.empty')}</EmptyState>}>
+        {vm.rows.map(({ shop, ownerName, categories, status, stats, revenue, isToggling }) => (
           <Tr key={shop.id} className={shop.suspended ? 'opacity-60' : undefined}>
             <Td>
               <div className="flex items-center gap-3">
@@ -64,18 +63,24 @@ export function ShopsPage() {
             </Td>
             <Td className="text-sm font-bold text-slate-600">{ownerName}</Td>
             <Td>
-              <LinkButton onClick={() => vm.viewProducts(shop)} aria-label={`${stats.productCount} products of ${shop.name}`}>
+              <LinkButton
+                onClick={() => vm.viewProducts(shop)}
+                aria-label={t('shops.productsOf', { count: stats.productCount, name: shop.name })}
+              >
                 {stats.productCount}
               </LinkButton>
             </Td>
             <Td>
-              <LinkButton onClick={() => vm.viewOrders(shop)} aria-label={`${stats.orderCount} orders of ${shop.name}`}>
+              <LinkButton
+                onClick={() => vm.viewOrders(shop)}
+                aria-label={t('shops.ordersOf', { count: stats.orderCount, name: shop.name })}
+              >
                 {stats.orderCount}
               </LinkButton>
             </Td>
-            <Td className="text-sm font-black whitespace-nowrap text-slate-900">{formatUzs(stats.revenue)}</Td>
+            <Td className="text-sm font-black whitespace-nowrap text-slate-900">{revenue}</Td>
             <Td>
-              <Pill tone={SHOP_STATUS_META[status].tone}>{SHOP_STATUS_META[status].label}</Pill>
+              <Pill tone={SHOP_STATUS_TONE[status]}>{t(`shops.status.${status}`)}</Pill>
             </Td>
             <Td>
               <RowActions>
@@ -84,7 +89,7 @@ export function ShopsPage() {
                   disabled={isToggling}
                   onClick={() => vm.toggleSuspension(shop)}
                 >
-                  {shop.suspended ? 'Reactivate' : 'Suspend'}
+                  {shop.suspended ? t('shops.reactivate') : t('shops.suspend')}
                 </RowActionButton>
                 <EditButton onClick={() => vm.edit(shop)} />
               </RowActions>

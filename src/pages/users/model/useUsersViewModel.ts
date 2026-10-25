@@ -4,10 +4,12 @@ import { shopsOwnedBy, useShopsQuery } from '@/entities/shop'
 import { useOrdersQuery } from '@/entities/order'
 import { useToggleUserBlock } from '@/features/moderate-user'
 import { toDraft, useEntityEditor, userFields } from '@/features/edit-entity'
+import { useLocale } from '@/shared/i18n'
 import { formatDate, matchesQuery } from '@/shared/lib'
 import { matchesUserTab, USER_TABS, type UserTab } from './userTabs'
 
 export function useUsersViewModel() {
+  const { t, language } = useLocale()
   const usersQuery = useUsersQuery()
   const shopsQuery = useShopsQuery()
   const ordersQuery = useOrdersQuery()
@@ -27,7 +29,7 @@ export function useUsersViewModel() {
       const owned = shopsOwnedBy(shops, user.id)
       return {
         user,
-        joined: formatDate(user.joinedAt),
+        joined: formatDate(user.joinedAt, language),
         shops: owned.length ? owned.map((s) => s.name).join(', ') : '—',
         orderCount: orders.filter((o) => o.userId === user.id).length,
         // Maintainers can't be blocked from the panel.
@@ -44,11 +46,15 @@ export function useUsersViewModel() {
     setSearch,
     tab,
     setTab,
-    tabs: USER_TABS.map((t) => ({ ...t, count: users.filter((u) => matchesUserTab(u, t.key)).length })),
+    tabs: USER_TABS.map((key) => ({
+      key,
+      label: t(`users.tabs.${key}`),
+      count: users.filter((u) => matchesUserTab(u, key)).length,
+    })),
     rows,
     toggleBlock: blocking.toggle,
     edit: (user: User) => editor.open({ kind: 'user', id: user.id }),
     editor,
-    editing: editing ? { id: editing.id, original: toDraft(editing), fields: userFields() } : null,
+    editing: editing ? { id: editing.id, original: toDraft(editing), fields: userFields(t) } : null,
   }
 }

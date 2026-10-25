@@ -1,0 +1,382 @@
+{
+  "common": {
+    "cancel": "Bekor qilish",
+    "close": "Yopish",
+    "edit": "Tahrirlash",
+    "actions": "Amallar",
+    "currency": "so'm",
+    "pcs": "{{count}} dona",
+    "pcsUnit": "dona",
+    "clearFilter": "Filtrni olib tashlash: {{label}}",
+    "shopFilter": "Do'kon: {{name}}",
+    "language": "Til"
+  },
+  "categories": {
+    "FLOWERS": "Gullar",
+    "GIFTS": "Sovg'alar",
+    "BAKERY": "Pishiriqlar"
+  },
+  "age": {
+    "now": "hozir",
+    "minutes": "{{count}} daq",
+    "hours": "{{count}} soat",
+    "days": "{{count}} kun"
+  },
+  "layout": {
+    "brand": "Gulso 1.0",
+    "panel": "Boshqaruv paneli",
+    "mainNav": "Asosiy menyu",
+    "breadcrumb": "Navigatsiya",
+    "toggleSidebar": "Yon panelni yashirish/ko'rsatish",
+    "logout": "Chiqish",
+    "notifications": "Bildirishnomalar",
+    "pendingRequests_one": "{{count}} ta do'kon arizasi kutmoqda",
+    "pendingRequests_other": "{{count}} ta do'kon arizasi kutmoqda",
+    "pendingBadge": "{{count}} ta kutilmoqda"
+  },
+  "pages": {
+    "requests": {
+      "title": "Do'kon arizalari",
+      "subtitle": "Ochilishdan oldin tasdiqlashni kutayotgan yangi do'konlar",
+      "searchPlaceholder": "Do'kon yoki egasi nomi...",
+      "searchLabel": "Do'kon arizalarini qidirish"
+    },
+    "shops": {
+      "title": "Do'konlar",
+      "subtitle": "Gulsodagi barcha do'konlar",
+      "searchPlaceholder": "Do'konlarni qidirish...",
+      "searchLabel": "Do'konlarni qidirish"
+    },
+    "products": {
+      "title": "Mahsulotlar",
+      "subtitle": "Barcha do'konlardagi mahsulotlar",
+      "searchPlaceholder": "Mahsulotlarni qidirish...",
+      "searchLabel": "Mahsulotlarni qidirish"
+    },
+    "orders": {
+      "title": "Buyurtmalar",
+      "subtitle": "Barcha do'konlardagi buyurtmalar",
+      "searchPlaceholder": "Buyurtma №, mijoz yoki telefon...",
+      "searchLabel": "Buyurtmalarni qidirish"
+    },
+    "users": {
+      "title": "Foydalanuvchilar",
+      "subtitle": "Xaridorlar, sotuvchilar va administratorlar",
+      "searchPlaceholder": "Ism yoki telefon...",
+      "searchLabel": "Foydalanuvchilarni qidirish"
+    }
+  },
+  "requests": {
+    "tabsLabel": "Ariza holati",
+    "status": {
+      "PENDING": {
+        "badge": "KO'RIB CHIQILMOQDA",
+        "tab": "Kutilmoqda"
+      },
+      "CHANGES_REQUESTED": {
+        "badge": "TUZATISH SO'RALDI",
+        "tab": "Tuzatish so'ralgan"
+      },
+      "APPROVED": {
+        "badge": "TASDIQLANDI",
+        "tab": "Tasdiqlangan"
+      },
+      "REJECTED": {
+        "badge": "RAD ETILDI",
+        "tab": "Rad etilgan"
+      }
+    },
+    "empty": "Hech narsa yo'q",
+    "resubmitted": "QAYTA YUBORILDI",
+    "applicationLabel": "{{name}} arizasi",
+    "application": "Ariza #A-{{id}} · yuborilgan: {{date}}",
+    "sections": {
+      "owner": "Egasi",
+      "shop": "Do'kon",
+      "contact": "Aloqa va yuridik ma'lumot",
+      "documents": "Hujjatlar"
+    },
+    "fields": {
+      "phone": "Telefon",
+      "address": "Olib ketish manzili",
+      "legalEntity": "Yuridik shakl",
+      "stir": "STIR"
+    },
+    "legalEntity": {
+      "LLC": "MChJ",
+      "YATT": "Yakka tartibdagi tadbirkor (YaTT)"
+    },
+    "ownerTag": {
+      "blocked": "Bloklangan foydalanuvchi",
+      "existing_one": "Mavjud sotuvchi · {{count}} ta do'kon: {{shops}}",
+      "existing_other": "Mavjud sotuvchi · {{count}} ta do'kon: {{shops}}",
+      "first": "Birinchi do'kon · yangi sotuvchi"
+    },
+    "note": {
+      "resubmitted": "Oldingi izoh — sotuvchi qayta yubordi",
+      "changes": "Sotuvchiga yuborilgan izoh",
+      "rejected": "Rad etish sababi",
+      "approved": "Qaror"
+    },
+    "openDocument": "Ochish"
+  },
+  "review": {
+    "checksTitle": "Tekshiruvlar",
+    "checks": {
+      "docs": "Hujjatlar o'qiladi",
+      "stir": "STIR guvohnomaga mos",
+      "addr": "Manzil tasdiqlandi"
+    },
+    "hintProgress": "{{total}} tadan {{done}} ta tekshiruv bajarildi — tasdiqlash uchun hammasini bajaring",
+    "hintDone": "Barcha tekshiruvlar bajarildi",
+    "reject": "Rad etish",
+    "requestChanges": "Tuzatish so'rash",
+    "approve": "Tasdiqlash va do'konni ochish",
+    "composer": {
+      "changes": {
+        "label": "Sotuvchi nimani tuzatishi kerak?",
+        "placeholder": "Sotuvchi ko'radigan izoh yozing",
+        "submit": "Sotuvchiga yuborish",
+        "presets": {
+          "unreadable": {
+            "label": "Hujjat o'qilmaydi",
+            "text": "Ro'yxatdan o'tish guvohnomasi surati o'qilmaydi. Iltimos, aniq skan yoki PDF yuklang."
+          },
+          "stir": {
+            "label": "STIR mos emas",
+            "text": "Arizadagi STIR guvohnomadagiga mos kelmaydi. Iltimos, qayta tekshiring."
+          },
+          "address": {
+            "label": "Manzil to'liq emas",
+            "text": "Iltimos, olib ketish manzilini bino raqami bilan to'liq kiriting."
+          }
+        }
+      },
+      "reject": {
+        "label": "Rad etish sababi",
+        "placeholder": "Ariza beruvchi bu sababni ko'radi",
+        "submit": "Arizani rad etish",
+        "presets": {
+          "duplicate": {
+            "label": "Takroriy hisob",
+            "text": "Mavjud yoki bloklangan hisobning takrori."
+          },
+          "prohibited": {
+            "label": "Taqiqlangan tovarlar",
+            "text": "Ko'rsatilgan mahsulotlarni Gulsoda sotish mumkin emas."
+          },
+          "unverifiable": {
+            "label": "Hujjatlarni tekshirib bo'lmadi",
+            "text": "Yuborilgan hujjatlarni tasdiqlay olmadik."
+          }
+        }
+      }
+    },
+    "toast": {
+      "approvedTitle": "{{name}} tasdiqlandi",
+      "approvedDesc": "Endi u {{owner}} sotuvchi hisobida ochiladi.",
+      "approveFailed": "Tasdiqlab bo'lmadi",
+      "changesTitle": "Tuzatish so'raldi",
+      "changesDesc": "{{owner}} izohingizni ko'radi.",
+      "rejectedTitle": "{{name}} rad etildi",
+      "rejectedDesc": "Ariza beruvchiga xabar yuborildi.",
+      "sendFailed": "Yuborib bo'lmadi"
+    }
+  },
+  "shops": {
+    "tabsLabel": "Do'kon holati",
+    "tabs": {
+      "ALL": "Barchasi",
+      "ACTIVE": "Faol",
+      "SUSPENDED": "To'xtatilgan"
+    },
+    "columns": {
+      "shop": "Do'kon",
+      "owner": "Egasi",
+      "products": "Mahsulotlar",
+      "orders": "Buyurtmalar",
+      "revenue": "Daromad",
+      "status": "Holat"
+    },
+    "status": {
+      "ACTIVE": "FAOL",
+      "NEW": "YANGI",
+      "SUSPENDED": "TO'XTATILGAN"
+    },
+    "productsOf": "{{name}}: {{count}} ta mahsulot",
+    "ordersOf": "{{name}}: {{count}} ta buyurtma",
+    "suspend": "To'xtatish",
+    "reactivate": "Qayta faollashtirish",
+    "empty": "Do'konlar topilmadi",
+    "toast": {
+      "suspendedTitle": "{{name}} to'xtatildi",
+      "suspendedDesc": "Uning mahsulotlari xaridorlardan yashirildi.",
+      "reactivatedTitle": "{{name}} qayta faollashtirildi",
+      "reactivatedDesc": "Uning mahsulotlari yana ko'rinadi.",
+      "failed": "Do'konni yangilab bo'lmadi"
+    }
+  },
+  "products": {
+    "tabsLabel": "Mahsulot holati",
+    "tabs": {
+      "ALL": "Barchasi",
+      "ACTIVE": "Mavjud",
+      "OUT": "Mavjud emas",
+      "HIDDEN": "Yashirilgan"
+    },
+    "columns": {
+      "product": "Mahsulot",
+      "shop": "Do'kon",
+      "price": "Narx",
+      "stock": "Qoldiq",
+      "rating": "Reyting",
+      "status": "Holat"
+    },
+    "badge": {
+      "ACTIVE": "MAVJUD",
+      "OUT": "MAVJUD EMAS",
+      "HIDDEN": "YASHIRILGAN",
+      "SHOP_SUSPENDED": "DO'KON TO'XTATILGAN"
+    },
+    "hide": "Yashirish",
+    "unhide": "Ko'rsatish",
+    "empty": "Hech narsa topilmadi",
+    "failed": "Mahsulotni yangilab bo'lmadi"
+  },
+  "orders": {
+    "tabsLabel": "Buyurtma holati",
+    "all": "Barchasi",
+    "columns": {
+      "order": "Buyurtma",
+      "customer": "Mijoz",
+      "shop": "Do'kon",
+      "items": "Tarkibi",
+      "total": "Jami",
+      "commission": "Komissiya",
+      "status": "Holat"
+    },
+    "status": {
+      "ACCEPTED": {
+        "label": "QABUL QILINDI",
+        "tab": "Yangi"
+      },
+      "PREPARING": {
+        "label": "TAYYORLANMOQDA",
+        "tab": "Tayyorlanmoqda"
+      },
+      "IN_DELIVERY": {
+        "label": "YETKAZILMOQDA",
+        "tab": "Yetkazilmoqda"
+      },
+      "COMPLETED": {
+        "label": "BAJARILDI",
+        "tab": "Yakunlangan"
+      },
+      "CANCELLED": {
+        "label": "BEKOR QILINDI",
+        "tab": "Bekor qilingan"
+      }
+    },
+    "delivery": {
+      "DELIVERY": {
+        "label": "YETKAZIB BERISH",
+        "title": "Yetkazib berish"
+      },
+      "PICKUP": {
+        "label": "OLIB KETISH",
+        "title": "Olib ketish"
+      }
+    },
+    "orderNumber": "Buyurtma #{{id}}",
+    "cancel": "Bekor qilish",
+    "empty": "Buyurtmalar topilmadi",
+    "toast": {
+      "cancelledTitle": "Buyurtma #{{id}} bekor qilindi",
+      "cancelledDesc": "Mijoz va do'konga xabar berildi.",
+      "failed": "Buyurtmani bekor qilib bo'lmadi"
+    }
+  },
+  "users": {
+    "tabsLabel": "Foydalanuvchi turi",
+    "tabs": {
+      "ALL": "Barchasi",
+      "USER": "Xaridorlar",
+      "SELLER": "Sotuvchilar",
+      "ADMIN": "Administratorlar",
+      "BLOCKED": "Bloklangan"
+    },
+    "columns": {
+      "user": "Foydalanuvchi",
+      "phone": "Telefon",
+      "roles": "Rollar",
+      "shops": "Do'konlar",
+      "orders": "Buyurtmalar",
+      "joined": "Qo'shilgan"
+    },
+    "roles": {
+      "USER": {
+        "tag": "XARIDOR",
+        "title": "Xaridor"
+      },
+      "SELLER": {
+        "tag": "SOTUVCHI",
+        "title": "Sotuvchi"
+      },
+      "ADMIN": {
+        "tag": "ADMIN",
+        "title": "Administrator"
+      }
+    },
+    "blockedTag": "BLOKLANGAN",
+    "block": "Bloklash",
+    "unblock": "Blokdan chiqarish",
+    "empty": "Foydalanuvchilar topilmadi",
+    "failed": "Foydalanuvchini yangilab bo'lmadi"
+  },
+  "edit": {
+    "kind": {
+      "shop": "Do'kon",
+      "product": "Mahsulot",
+      "order": "Buyurtma",
+      "user": "Foydalanuvchi"
+    },
+    "eyebrow": "{{kind}} · ID {{id}}",
+    "description": "O'zgarishlar xaridorlar va sotuvchi uchun darhol kuchga kiradi.",
+    "edited": "O'ZGARTIRILDI",
+    "noChanges": "O'zgarish yo'q",
+    "changes_one": "{{count}} ta o'zgarish",
+    "changes_other": "{{count}} ta o'zgarish",
+    "save": "Saqlash",
+    "fields": {
+      "shopName": "Do'kon nomi",
+      "owner": "Egasi",
+      "categories": "Kategoriyalar",
+      "commission": "Platforma komissiyasi",
+      "status": "Holat",
+      "suspendedHint": "To'xtatilgan — xaridorlardan yashirin",
+      "productName": "Mahsulot nomi",
+      "shop": "Do'kon",
+      "category": "Kategoriya",
+      "price": "Narx",
+      "discount": "Chegirma",
+      "stock": "Qoldiq",
+      "visibility": "Ko'rinish",
+      "hiddenHint": "Xaridorlardan yashirilgan",
+      "deliveryType": "Yetkazish turi",
+      "customer": "Mijoz",
+      "items": "Tarkibi",
+      "total": "Jami",
+      "fullName": "To'liq ism",
+      "phone": "Telefon",
+      "roles": "Rollar",
+      "access": "Kirish",
+      "blockedHint": "Bloklangan — kira olmaydi va buyurtma bera olmaydi"
+    },
+    "toast": {
+      "updated": "{{label}} yangilandi",
+      "sellerNotified": "Sotuvchiga o'zgarish haqida xabar berildi.",
+      "userNotified": "Foydalanuvchi o'zgarishlarni keyingi kirishda ko'radi.",
+      "failed": "O'zgarishlarni saqlab bo'lmadi"
+    }
+  }
+}

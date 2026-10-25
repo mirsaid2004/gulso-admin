@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react'
+import { useLocale } from '@/shared/i18n'
 import { Button } from '@/shared/ui'
 import type { ReviewShopRequestModel } from '../model/useReviewShopRequest'
 import { NoteComposer } from './NoteComposer'
@@ -6,6 +7,7 @@ import { VerificationChecks } from './VerificationChecks'
 
 /** Checks, optional note composer and the Reject / Request changes / Approve action bar. */
 export function ReviewPanel({ model }: { model: ReviewShopRequestModel }) {
+  const { t } = useLocale()
   return (
     <>
       <VerificationChecks checks={model.checks} toggleCheck={model.toggleCheck} />
@@ -23,14 +25,14 @@ export function ReviewPanel({ model }: { model: ReviewShopRequestModel }) {
         <span className="text-xs font-semibold text-slate-400">{model.approveHint}</span>
         <div className="flex flex-wrap gap-2">
           <Button variant="dangerGhost" onClick={() => model.openComposer('reject')}>
-            Reject
+            {t('review.reject')}
           </Button>
           <Button variant="soft" onClick={() => model.openComposer('changes')}>
-            Request changes
+            {t('review.requestChanges')}
           </Button>
           <Button variant="primary" className="px-7" onClick={model.approve} disabled={!model.canApprove}>
             <Check className="size-4" strokeWidth={2.5} />
-            Approve &amp; open shop
+            {t('review.approve')}
           </Button>
         </div>
       </div>

@@ -1,17 +1,13 @@
 import { useState } from 'react'
-import {
-  countByStatus,
-  REQUEST_STATUSES,
-  REQUEST_STATUS_META,
-  useShopRequestsQuery,
-  type RequestStatus,
-} from '@/entities/shop-request'
+import { countByStatus, REQUEST_STATUSES, useShopRequestsQuery, type RequestStatus } from '@/entities/shop-request'
 import { findUser, useUsersQuery } from '@/entities/user'
 import { shopsOwnedBy, useShopsQuery } from '@/entities/shop'
 import { categoryEmoji } from '@/shared/config'
-import { formatAge, matchesQuery } from '@/shared/lib'
+import { useLocale } from '@/shared/i18n'
+import { getAge, matchesQuery } from '@/shared/lib'
 
 export function useShopRequestsViewModel() {
+  const { t } = useLocale()
   const requestsQuery = useShopRequestsQuery()
   const usersQuery = useUsersQuery()
   const shopsQuery = useShopsQuery()
@@ -26,12 +22,15 @@ export function useShopRequestsViewModel() {
 
   const list = requests
     .filter((r) => r.status === tab && matchesQuery(search, r.name, findUser(users, r.ownerId).name))
-    .map((r) => ({
-      request: r,
-      ownerName: findUser(users, r.ownerId).name,
-      emojis: r.categories.map(categoryEmoji).join(' '),
-      age: formatAge(r.submittedAt),
-    }))
+    .map((r) => {
+      const age = getAge(r.submittedAt)
+      return {
+        request: r,
+        ownerName: findUser(users, r.ownerId).name,
+        emojis: r.categories.map(categoryEmoji).join(' '),
+        age: t(`age.${age.unit}`, { count: age.count }),
+      }
+    })
 
   // Falls back to the first visible request, so after a decision the next pending one opens.
   const selected = list.find((item) => item.request.id === selectedId) ?? list[0] ?? null
@@ -42,7 +41,11 @@ export function useShopRequestsViewModel() {
     search,
     setSearch,
     tab,
-    tabs: REQUEST_STATUSES.map((s) => ({ key: s, label: REQUEST_STATUS_META[s].tab, count: countByStatus(requests, s) })),
+    tabs: REQUEST_STATUSES.map((s) => ({
+      key: s,
+      label: t(`requests.status.${s}.tab`),
+      count: countByStatus(requests, s),
+    })),
     setTab: (next: RequestStatus) => {
       setTab(next)
       setSelectedId(null)

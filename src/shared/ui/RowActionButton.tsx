@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 import { Pencil } from 'lucide-react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { useLocale } from '@/shared/i18n'
 import { cn } from '@/shared/lib'
 
 const rowActionVariants = cva(
@@ -25,11 +26,12 @@ export function RowActionButton({ className, tone, type = 'button', ...props }: 
 }
 
 export function EditButton({ className, type = 'button', ...props }: ComponentProps<'button'>) {
+  const { t } = useLocale()
   return (
     <button
       type={type}
-      title="Edit"
-      aria-label="Edit"
+      title={t('common.edit')}
+      aria-label={t('common.edit')}
       className={cn(
         'flex size-9 shrink-0 items-center justify-center rounded-xl border-none bg-slate-50 text-slate-500 transition-colors hover:bg-primary/10 hover:text-primary',
         className,

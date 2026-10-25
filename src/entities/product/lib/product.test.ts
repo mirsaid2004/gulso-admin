@@ -32,12 +32,12 @@ describe('getProductStatus', () => {
 
 describe('getProductBadge', () => {
   it('explains when a product is hidden because of its shop', () => {
-    expect(getProductBadge('HIDDEN', true)).toEqual({ label: 'SHOP SUSPENDED', tone: 'rose' })
-    expect(getProductBadge('HIDDEN', false)).toEqual({ label: 'HIDDEN', tone: 'rose' })
+    expect(getProductBadge('HIDDEN', true)).toEqual({ key: 'SHOP_SUSPENDED', tone: 'rose' })
+    expect(getProductBadge('HIDDEN', false)).toEqual({ key: 'HIDDEN', tone: 'rose' })
   })
 
-  it('labels stock states', () => {
-    expect(getProductBadge('OUT', false).label).toBe('OUT OF STOCK')
-    expect(getProductBadge('ACTIVE', false).label).toBe('IN STOCK')
+  it('maps stock states to their badges', () => {
+    expect(getProductBadge('OUT', false)).toEqual({ key: 'OUT', tone: 'stockOut' })
+    expect(getProductBadge('ACTIVE', false)).toEqual({ key: 'ACTIVE', tone: 'success' })
   })
 })

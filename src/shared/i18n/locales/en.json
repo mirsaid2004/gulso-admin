@@ -1,0 +1,382 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "actions": "Actions",
+    "currency": "UZS",
+    "pcs": "{{count}} pcs",
+    "pcsUnit": "pcs",
+    "clearFilter": "Clear filter {{label}}",
+    "shopFilter": "Shop: {{name}}",
+    "language": "Language"
+  },
+  "categories": {
+    "FLOWERS": "Flowers",
+    "GIFTS": "Gifts",
+    "BAKERY": "Bakery"
+  },
+  "age": {
+    "now": "now",
+    "minutes": "{{count}}m",
+    "hours": "{{count}}h",
+    "days": "{{count}}d"
+  },
+  "layout": {
+    "brand": "Gulso 1.0",
+    "panel": "Maintainer panel",
+    "mainNav": "Main",
+    "breadcrumb": "Breadcrumb",
+    "toggleSidebar": "Toggle sidebar",
+    "logout": "Log out",
+    "notifications": "Notifications",
+    "pendingRequests_one": "{{count}} shop request waiting",
+    "pendingRequests_other": "{{count}} shop requests waiting",
+    "pendingBadge": "{{count}} pending"
+  },
+  "pages": {
+    "requests": {
+      "title": "Shop requests",
+      "subtitle": "New shops waiting for confirmation before they open",
+      "searchPlaceholder": "Shop or owner name...",
+      "searchLabel": "Search shop requests"
+    },
+    "shops": {
+      "title": "Shops",
+      "subtitle": "Every shop on Gulso",
+      "searchPlaceholder": "Search shops...",
+      "searchLabel": "Search shops"
+    },
+    "products": {
+      "title": "Products",
+      "subtitle": "All products across all shops",
+      "searchPlaceholder": "Search products...",
+      "searchLabel": "Search products"
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "All orders across all shops",
+      "searchPlaceholder": "Order #, customer or phone...",
+      "searchLabel": "Search orders"
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Buyers, sellers and maintainers",
+      "searchPlaceholder": "Name or phone...",
+      "searchLabel": "Search users"
+    }
+  },
+  "requests": {
+    "tabsLabel": "Request status",
+    "status": {
+      "PENDING": {
+        "badge": "UNDER REVIEW",
+        "tab": "Pending"
+      },
+      "CHANGES_REQUESTED": {
+        "badge": "CHANGES REQUESTED",
+        "tab": "Changes requested"
+      },
+      "APPROVED": {
+        "badge": "APPROVED",
+        "tab": "Approved"
+      },
+      "REJECTED": {
+        "badge": "REJECTED",
+        "tab": "Rejected"
+      }
+    },
+    "empty": "Nothing here",
+    "resubmitted": "RESUBMITTED",
+    "applicationLabel": "{{name}} application",
+    "application": "Application #A-{{id}} · submitted {{date}}",
+    "sections": {
+      "owner": "Owner",
+      "shop": "Shop",
+      "contact": "Contact & legal",
+      "documents": "Documents"
+    },
+    "fields": {
+      "phone": "Phone",
+      "address": "Pickup address",
+      "legalEntity": "Legal entity",
+      "stir": "STIR"
+    },
+    "legalEntity": {
+      "LLC": "LLC (MChJ)",
+      "YATT": "Sole proprietor (YaTT)"
+    },
+    "ownerTag": {
+      "blocked": "Blocked user",
+      "existing_one": "Existing seller · {{count}} shop: {{shops}}",
+      "existing_other": "Existing seller · {{count}} shops: {{shops}}",
+      "first": "First shop · new seller"
+    },
+    "note": {
+      "resubmitted": "Previous note — seller resubmitted",
+      "changes": "Note sent to seller",
+      "rejected": "Rejection reason",
+      "approved": "Decision"
+    },
+    "openDocument": "Open"
+  },
+  "review": {
+    "checksTitle": "Verification checks",
+    "checks": {
+      "docs": "Documents are readable",
+      "stir": "STIR matches the certificate",
+      "addr": "Address verified"
+    },
+    "hintProgress": "{{done}} of {{total}} checks done — complete them to approve",
+    "hintDone": "All checks passed",
+    "reject": "Reject",
+    "requestChanges": "Request changes",
+    "approve": "Approve & open shop",
+    "composer": {
+      "changes": {
+        "label": "What should the seller fix?",
+        "placeholder": "Write a note the seller will see",
+        "submit": "Send to seller",
+        "presets": {
+          "unreadable": {
+            "label": "Unreadable document",
+            "text": "The registration certificate photo is unreadable. Please upload a clear scan or PDF."
+          },
+          "stir": {
+            "label": "STIR mismatch",
+            "text": "The STIR in the form doesn't match the certificate. Please re-check it."
+          },
+          "address": {
+            "label": "Incomplete address",
+            "text": "Please add the full pickup address including building number."
+          }
+        }
+      },
+      "reject": {
+        "label": "Reason for rejection",
+        "placeholder": "The applicant will see this reason",
+        "submit": "Reject application",
+        "presets": {
+          "duplicate": {
+            "label": "Duplicate account",
+            "text": "Duplicate of an existing or blocked account."
+          },
+          "prohibited": {
+            "label": "Prohibited goods",
+            "text": "The described products are not allowed on Gulso."
+          },
+          "unverifiable": {
+            "label": "Unverifiable documents",
+            "text": "We couldn't verify the submitted documents."
+          }
+        }
+      }
+    },
+    "toast": {
+      "approvedTitle": "{{name}} approved",
+      "approvedDesc": "It now opens in {{owner}}'s seller account.",
+      "approveFailed": "Could not approve",
+      "changesTitle": "Changes requested",
+      "changesDesc": "{{owner}} will see your note.",
+      "rejectedTitle": "{{name}} rejected",
+      "rejectedDesc": "The applicant has been notified.",
+      "sendFailed": "Could not send"
+    }
+  },
+  "shops": {
+    "tabsLabel": "Shop status",
+    "tabs": {
+      "ALL": "All",
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspended"
+    },
+    "columns": {
+      "shop": "Shop",
+      "owner": "Owner",
+      "products": "Products",
+      "orders": "Orders",
+      "revenue": "Revenue",
+      "status": "Status"
+    },
+    "status": {
+      "ACTIVE": "ACTIVE",
+      "NEW": "NEW",
+      "SUSPENDED": "SUSPENDED"
+    },
+    "productsOf": "{{count}} products of {{name}}",
+    "ordersOf": "{{count}} orders of {{name}}",
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "empty": "No shops found",
+    "toast": {
+      "suspendedTitle": "{{name}} suspended",
+      "suspendedDesc": "Its products are hidden from buyers.",
+      "reactivatedTitle": "{{name}} reactivated",
+      "reactivatedDesc": "Its products are visible again.",
+      "failed": "Could not update shop"
+    }
+  },
+  "products": {
+    "tabsLabel": "Product status",
+    "tabs": {
+      "ALL": "All",
+      "ACTIVE": "In stock",
+      "OUT": "Out of stock",
+      "HIDDEN": "Hidden"
+    },
+    "columns": {
+      "product": "Product",
+      "shop": "Shop",
+      "price": "Price",
+      "stock": "Stock",
+      "rating": "Rating",
+      "status": "Status"
+    },
+    "badge": {
+      "ACTIVE": "IN STOCK",
+      "OUT": "OUT OF STOCK",
+      "HIDDEN": "HIDDEN",
+      "SHOP_SUSPENDED": "SHOP SUSPENDED"
+    },
+    "hide": "Hide",
+    "unhide": "Unhide",
+    "empty": "No results",
+    "failed": "Could not update product"
+  },
+  "orders": {
+    "tabsLabel": "Order status",
+    "all": "All",
+    "columns": {
+      "order": "Order",
+      "customer": "Customer",
+      "shop": "Shop",
+      "items": "Items",
+      "total": "Total",
+      "commission": "Commission",
+      "status": "Status"
+    },
+    "status": {
+      "ACCEPTED": {
+        "label": "ACCEPTED",
+        "tab": "New"
+      },
+      "PREPARING": {
+        "label": "PREPARING",
+        "tab": "Preparing"
+      },
+      "IN_DELIVERY": {
+        "label": "IN DELIVERY",
+        "tab": "In delivery"
+      },
+      "COMPLETED": {
+        "label": "COMPLETED",
+        "tab": "Completed"
+      },
+      "CANCELLED": {
+        "label": "CANCELLED",
+        "tab": "Cancelled"
+      }
+    },
+    "delivery": {
+      "DELIVERY": {
+        "label": "DELIVERY",
+        "title": "Delivery"
+      },
+      "PICKUP": {
+        "label": "PICKUP",
+        "title": "Pickup"
+      }
+    },
+    "orderNumber": "Order #{{id}}",
+    "cancel": "Cancel",
+    "empty": "No orders found",
+    "toast": {
+      "cancelledTitle": "Order #{{id}} cancelled",
+      "cancelledDesc": "Customer and shop have been notified.",
+      "failed": "Could not cancel order"
+    }
+  },
+  "users": {
+    "tabsLabel": "User type",
+    "tabs": {
+      "ALL": "All",
+      "USER": "Buyers",
+      "SELLER": "Sellers",
+      "ADMIN": "Maintainers",
+      "BLOCKED": "Blocked"
+    },
+    "columns": {
+      "user": "User",
+      "phone": "Phone",
+      "roles": "Roles",
+      "shops": "Shops",
+      "orders": "Orders",
+      "joined": "Joined"
+    },
+    "roles": {
+      "USER": {
+        "tag": "USER",
+        "title": "Buyer"
+      },
+      "SELLER": {
+        "tag": "SELLER",
+        "title": "Seller"
+      },
+      "ADMIN": {
+        "tag": "ADMIN",
+        "title": "Maintainer"
+      }
+    },
+    "blockedTag": "BLOCKED",
+    "block": "Block",
+    "unblock": "Unblock",
+    "empty": "No users found",
+    "failed": "Could not update user"
+  },
+  "edit": {
+    "kind": {
+      "shop": "Shop",
+      "product": "Product",
+      "order": "Order",
+      "user": "User"
+    },
+    "eyebrow": "{{kind}} · ID {{id}}",
+    "description": "Changes apply immediately for buyers and the seller.",
+    "edited": "EDITED",
+    "noChanges": "No changes",
+    "changes_one": "{{count}} change",
+    "changes_other": "{{count}} changes",
+    "save": "Save changes",
+    "fields": {
+      "shopName": "Shop name",
+      "owner": "Owner",
+      "categories": "Categories",
+      "commission": "Platform commission",
+      "status": "Status",
+      "suspendedHint": "Suspended — hidden from buyers",
+      "productName": "Product name",
+      "shop": "Shop",
+      "category": "Category",
+      "price": "Price",
+      "discount": "Discount",
+      "stock": "Stock",
+      "visibility": "Visibility",
+      "hiddenHint": "Hidden from buyers",
+      "deliveryType": "Delivery type",
+      "customer": "Customer",
+      "items": "Items",
+      "total": "Total",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "roles": "Roles",
+      "access": "Access",
+      "blockedHint": "Blocked — can't log in or order"
+    },
+    "toast": {
+      "updated": "{{label}} updated",
+      "sellerNotified": "The seller has been notified of the edit.",
+      "userNotified": "The user will see the changes on next login.",
+      "failed": "Could not save changes"
+    }
+  }
+}

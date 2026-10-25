@@ -1,23 +1,14 @@
-export const VERIFICATION_CHECKS = [
-  { key: 'docs', label: 'Documents are readable' },
-  { key: 'stir', label: 'STIR matches the certificate' },
-  { key: 'addr', label: 'Address verified' },
-] as const
+/** Each key is also the `review.checks.*` translation key. */
+export const VERIFICATION_CHECKS = ['docs', 'stir', 'addr'] as const
 
-export type CheckKey = (typeof VERIFICATION_CHECKS)[number]['key']
+export type CheckKey = (typeof VERIFICATION_CHECKS)[number]
 
 export type CheckState = Partial<Record<CheckKey, boolean>>
 
 export function countCompleted(state: CheckState = {}): number {
-  return VERIFICATION_CHECKS.filter((c) => state[c.key]).length
+  return VERIFICATION_CHECKS.filter((key) => state[key]).length
 }
 
 export function allChecksPassed(state: CheckState = {}): boolean {
   return countCompleted(state) === VERIFICATION_CHECKS.length
-}
-
-export function approveHint(state: CheckState = {}): string {
-  const done = countCompleted(state)
-  const total = VERIFICATION_CHECKS.length
-  return done === total ? 'All checks passed' : `${done} of ${total} checks done — complete them to approve`
 }

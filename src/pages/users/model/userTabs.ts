@@ -2,13 +2,7 @@ import type { Role, User } from '@/entities/user'
 
 export type UserTab = 'ALL' | Role | 'BLOCKED'
 
-export const USER_TABS: Array<{ key: UserTab; label: string }> = [
-  { key: 'ALL', label: 'All' },
-  { key: 'USER', label: 'Buyers' },
-  { key: 'SELLER', label: 'Sellers' },
-  { key: 'ADMIN', label: 'Maintainers' },
-  { key: 'BLOCKED', label: 'Blocked' },
-]
+export const USER_TABS: UserTab[] = ['ALL', 'USER', 'SELLER', 'ADMIN', 'BLOCKED']
 
 export function matchesUserTab(user: Pick<User, 'roles' | 'blocked'>, tab: UserTab): boolean {
   if (tab === 'ALL') return true
