@@ -1,0 +1,6 @@
+export type { EntityKind, FieldDef, Draft } from './model/types'
+export { shopFields, productFields, orderFields, userFields } from './model/schemas'
+export { isSameValue, dirtyKeys, buildPatch, normalizeValue, toggleInList, toDraft } from './model/draft'
+export { useEditDraft } from './model/useEditDraft'
+export { useEntityEditor, type EditTarget, type EntityEditor } from './model/useEntityEditor'
+export { EditEntityDrawer } from './ui/EditEntityDrawer'
